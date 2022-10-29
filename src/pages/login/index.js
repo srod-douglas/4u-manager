@@ -4,8 +4,8 @@ const form = document.querySelector("form")
 const bts = document.querySelectorAll("button")
 
 bts.forEach((bt)=>{
-    bt.onclick = (event) => {
-        event.preventDefault()
+    bt.onclick = () => {
+
         const redirect = bt.dataset.path
         if(redirect !== undefined){
             window.location.replace(redirect)
