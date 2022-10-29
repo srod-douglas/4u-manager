@@ -1,4 +1,4 @@
-import { urlDepartments } from "../path.js";
+import { urlAllUsers, urlDepartments } from "../path.js";
 
 
 async function dataCompanies (token) {
@@ -21,4 +21,25 @@ async function dataCompanies (token) {
     }
 }
 
-export { dataCompanies }
+
+async function dataUsers (token) {
+    const request = await fetch(urlAllUsers,{
+        method: "GET",
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    try{
+        if(request.ok){
+            const data = await request.json()
+            return data
+        }else{
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export { dataCompanies, dataUsers }

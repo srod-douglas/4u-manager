@@ -6,5 +6,7 @@ const urlLogin = 'http://localhost:6278/auth/login'                 /* POST */
 const InfosUserLogged = 'http://localhost:6278/users/profile'       /* GET BEARER*/
 const urlRefreshUser = 'http://localhost:6278/users'
 const urlDepartments = 'http://localhost:6278/departments'
+const urlAllUsers = 'http://localhost:6278/users'
 
-export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin, InfosUserLogged, urlRefreshUser, urlDepartments }
+
+export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin, InfosUserLogged, urlRefreshUser, urlDepartments, urlAllUsers }
