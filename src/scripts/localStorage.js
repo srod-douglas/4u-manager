@@ -6,4 +6,9 @@ function setUserLocal (response) {
     localStorage.setItem("@user", JSON.stringify(response))
 }
 
-export { setTokenLocal, setUserLocal }
+function getTokenLocal () {
+    const token = localStorage.getItem("@user")
+    return JSON.parse(token)
+}
+
+export { setTokenLocal, setUserLocal, getTokenLocal }
