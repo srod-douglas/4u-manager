@@ -6,4 +6,4 @@ const urlLogin = 'http://localhost:6278/auth/login'                 /* POST */
 const InfosUserLogged = 'http://localhost:6278/users/profile'       /* GET BEARER*/
 
 
-export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin }
+export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin, InfosUserLogged }
