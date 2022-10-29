@@ -7,6 +7,31 @@
     <title>Kenzie Empresas - ADMIN</title>
 </head>
 <body>
-    <main></main>
+
+    <header>
+        <div>
+            <img src="../../assets/img/logo.svg" alt="">
+            <h1>Kenzie Empresas</h1>
+        </div>
+        <button id="logout" data-path="../../../index.html">Logout</button>
+    </header>
+
+    <main>
+        <section>
+            <div>
+                <h2>Departamentos</h2>
+                <select name="companies" id="companies">
+                    <option value="">Selecionar Empresa</option>
+                </select>
+                <button>+ Criar</button>
+            </div>
+            <ul id="departments"></ul>
+        </section>
+
+        <section>
+            <h2>Usuários Cadastrados</h2>
+            <ul id="registeredUsers"></ul>
+        </section>
+    </main>
 </body>
 </html>
