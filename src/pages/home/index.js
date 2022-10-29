@@ -12,10 +12,10 @@ bts.forEach((bt)=>{
     bt.onclick = () => {
         if(bt.id == "btLogin"){
             const redirectLogin = bt.dataset.path
-            window.location.assign(redirectLogin)
+            window.location.replace(redirectLogin)
         }else{
             const redirectRegister = bt.dataset.path
-            window.location.assign(redirectRegister)
+            window.location.replace(redirectRegister)
         }
     }
 })

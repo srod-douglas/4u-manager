@@ -7,4 +7,4 @@ const InfosUserLogged = 'http://localhost:6278/users/profile'       /* GET BEARE
 
 /* http://localhost:6278 */
 
-export { urlAllCompanies, urlSectors }
+export { urlAllCompanies, urlSectors, urlCreateNewUser }
