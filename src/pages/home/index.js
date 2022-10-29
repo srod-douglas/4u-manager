@@ -6,7 +6,19 @@ renderCompaniesHome()
 renderSectorsHome()
 
 const select = document.querySelector("select")
+const bts = document.querySelectorAll("button")
 
+bts.forEach((bt)=>{
+    bt.onclick = () => {
+        if(bt.id == "btLogin"){
+            const redirectLogin = bt.dataset.path
+            window.location.assign(redirectLogin)
+        }else{
+            const redirectRegister = bt.dataset.path
+            window.location.assign(redirectRegister)
+        }
+    }
+})
 
 select.addEventListener("change", async () =>{
     const sector = select.value
