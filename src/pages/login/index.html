@@ -7,7 +7,33 @@
     <title>Kenzie Empresas - Login</title>
 </head>
 <body>
-    <main></main>
+    <header>
+        <div>
+            <img src="../../assets/img/logo.svg" alt="Icone da plataforma">
+            <h1>Kenzie Empresas</h1>
+        </div>
+        <div>
+            <button class="bt-blue" data-path="../login/index.html">Login</button>
+            <button class="bt-blue-inverse" data-path="../register/index.html">Cadastro</button>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h1>Login</h1>
+            <h2>Preencha os campos para realizar o login</h2>
+            <form action="">
+                
+                <input type="email" name="email" placeholder="Seu email" required>
+                <input type="password" name="password" placeholder="Sua senha"required>
+
+                <button id="btLogin" type="submit">Login</button>
+                <span>ou</span>
+            </form>
+            <button data-path="../register/index.html">Cadastre-se</button>
+            
+        </section>
+    </main>
     <script type="module" src="./index.js"></script>
 </body>
 </html>
