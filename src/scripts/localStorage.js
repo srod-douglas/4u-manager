@@ -1,5 +1,9 @@
-function setLocal (response){
-    localStorage.setItem("@user",JSON.stringify(response))
+function setTokenLocal (response){
+    localStorage.setItem("@admin",JSON.stringify(response))
 }
 
-export { setLocal }
+function setUserLocal (response) {
+    localStorage.setItem("@user", JSON.stringify(response))
+}
+
+export { setTokenLocal, setUserLocal }
