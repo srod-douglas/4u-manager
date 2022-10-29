@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenzie Empresas</title>
+    <link rel="stylesheet" href="./src/styles/global.css">
+    <link rel="stylesheet" href="./src/styles/button.css">
+    <link rel="stylesheet" href="./src/pages/home/index.css">
+    <title>Kenzie Empresas - Home</title>
 </head>
 <body>
-    <main></main>
+    <header>
+        <div>
+            <img src="./src/assets/img/logo.svg" alt="Icone da plataforma">
+            <h1>Kenzie Empresas</h1>
+        </div>
+        <div>
+            <button class="bt-blue" data-path="">Login</button>
+            <button class="bt-blue-inverse" data-path="">Cadastro</button>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section>
+            <img src="./src/assets/img/background-login.svg" alt="Imagem Ilustrativa Empresarial">
+        </section>
+
+        <section class="container-filter">
+            <select name="filter" id="reference">
+                <option value="">Selecionar setor</option>
+            </select>
+            <ul id="registeredCompanies"></ul>
+        </section>
+
+    </main>
+
+<script type="module" src="./src/pages/home/index.js"></script>
 </body>
 </html>
