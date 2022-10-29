@@ -1,4 +1,4 @@
-import { InfosUserLogged } from "../path.js";
+import { InfosUserLogged, urlRefreshUser } from "../path.js";
 
 
 
@@ -22,7 +22,29 @@ async function getDataUser (token) {
     }
 }
 
+async function refreshDataUser (body, token) {
+    const request = await fetch(urlRefreshUser, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: body,
+    })
+
+    try{
+
+        if(request.ok){
+            const newData = await request.json()
+            console.log(newData)
+        }else{
+            console.log(request.message)
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+}
 
 
-
-export { getDataUser }
+export { getDataUser, refreshDataUser }
