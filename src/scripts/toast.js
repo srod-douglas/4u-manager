@@ -1,5 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
 import { refreshDataUser } from './request/dashboardUser.js'
+import { renderUserNotWorks } from './render/dashboardUser.js'
 
 function toast (message){
     
@@ -49,6 +50,10 @@ async function toastEditProfileUser (user) {
     background.appendChild(toast)
     view.appendChild(background)
 
+    btCloseToast.onclick = () => {
+        background.innerHTML = ""
+        window.location.reload()
+    }
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault()
@@ -60,6 +65,8 @@ async function toastEditProfileUser (user) {
         }
         const token = getTokenLocal()
         refreshDataUser(JSON.stringify(body), token.token)
+        background.innerHTML = "" /* CHANGE TO CLASS HIDDEN */
+        window.location.reload()
     })
 
 }
