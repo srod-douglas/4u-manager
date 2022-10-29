@@ -47,4 +47,53 @@ async function renderAllCompanies (response) {
 
 }
 
-export { renderAllCompanies }
+
+
+async function renderAllUsers (data) {
+    const users = await data
+
+    const ul = document.querySelector("#registeredUsers")
+
+    users.forEach((user) => {
+
+        const card = document.createElement("li")
+        const divInfos = document.createElement("div")
+        const divBts = document.createElement("div")
+
+        const name = document.createElement("h2")
+        const level = document.createElement("p")
+        const company = document.createElement("span")
+
+        const btEdit = document.createElement("img")
+        const btDel = document.createElement("img")
+
+        name.innerText = user.username
+        level.innerText = user.professional_level
+        company.innerText = user.department_uuid
+
+        if(user.department_uuid == null){
+            company.innerText = ""
+        }
+
+        btEdit.src = '../../assets/img/pen-to-square-solid.svg'
+        btEdit.alt = 'Icone para editar'
+
+        btDel.src = '../../assets/img/trash-can-solid.svg'
+        btDel.alt = 'Icone para excluir'
+
+        if(!user.is_admin){
+            divBts.append(btEdit, btDel)
+            divInfos.append(name, level, company)
+            card.append(divInfos, divBts)
+            ul.appendChild(card)
+        }else{
+           
+        }
+
+    })
+
+}
+
+
+
+export { renderAllCompanies, renderAllUsers }
