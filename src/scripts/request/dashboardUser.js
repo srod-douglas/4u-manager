@@ -14,12 +14,15 @@ async function getDataUser (token) {
 
         if(request.ok){
             const data = await request.json()
-            console.log(data)
+            return data
         }
 
     }catch(err){
         console.log(err)
     }
 }
+
+
+
 
 export { getDataUser }
