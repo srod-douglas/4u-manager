@@ -5,6 +5,5 @@ const urlCreateNewUser = 'http://localhost:6278/auth/register'      /* POST */
 const urlLogin = 'http://localhost:6278/auth/login'                 /* POST */
 const InfosUserLogged = 'http://localhost:6278/users/profile'       /* GET BEARER*/
 
-/* http://localhost:6278 */
 
-export { urlAllCompanies, urlSectors, urlCreateNewUser }
+export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin }
