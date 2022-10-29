@@ -5,8 +5,10 @@ async function createUser (data) {
 
     if(responseData.department_uuid == null){
         renderUserNotWorks(responseData)
+
     }else{
         renderUserWorks(responseData)
+
     }
 
 }
@@ -16,7 +18,9 @@ function renderUserNotWorks (user) {
     const divName = document.querySelector(".div_userName")
     const divInfosUser = document.querySelector(".div_infosUser")
     const secCompanie = document.querySelector(".sec_infosCompanie")
-
+    divName.innerHTML = ""
+    divInfosUser.innerHTML = ""
+    secCompanie.innerHTML = ""
     const name = document.createElement("h2")
     const email = document.createElement("p")
     const level = document.createElement("span")
@@ -51,4 +55,4 @@ function renderUserNotWorks (user) {
 function renderUserWorks () {
 
 }
-export { createUser }
+export { createUser, renderUserNotWorks }

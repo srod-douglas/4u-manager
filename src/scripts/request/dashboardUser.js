@@ -1,4 +1,5 @@
 import { InfosUserLogged, urlRefreshUser } from "../path.js";
+import { createUser, renderUserNotWorks } from "../render/dashboardUser.js";
 
 
 
@@ -36,7 +37,7 @@ async function refreshDataUser (body, token) {
 
         if(request.ok){
             const newData = await request.json()
-            console.log(newData)
+            createUser(newData)
         }else{
             console.log(request.message)
         }

@@ -19,4 +19,14 @@ setTimeout(() => {
     }
 },400)
 
+
+const btLogout = document.querySelector("#logout")
+
+btLogout.onclick = () => {
+    const redirect = btLogout.dataset.path
+    localStorage.removeItem("@user")
+    localStorage.removeItem("@admin")
+    window.location.replace(redirect)
+}
+
 createUser(getDataUser(token.token)) 
