@@ -4,6 +4,6 @@ const urlVerifyAdmin = 'http://localhost:6278/auth/validate_user'   /* GET */
 const urlCreateNewUser = 'http://localhost:6278/auth/register'      /* POST */
 const urlLogin = 'http://localhost:6278/auth/login'                 /* POST */
 const InfosUserLogged = 'http://localhost:6278/users/profile'       /* GET BEARER*/
+const urlRefreshUser = 'http://localhost:6278/users'
 
-
-export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin, InfosUserLogged }
+export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin, InfosUserLogged, urlRefreshUser }
