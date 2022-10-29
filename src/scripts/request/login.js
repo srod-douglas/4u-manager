@@ -1,5 +1,5 @@
 import { urlLogin, urlVerifyAdmin } from '../path.js'
-
+import { setLocal } from '../localStorage.js'
 
 
 async function checkLogin (body) {
@@ -35,6 +35,7 @@ async function validateUser (token) {
     try{
         const admin = await request.json()
         if(request.ok){
+            setLocal(admin)
             if(admin.is_admin){
                 window.location.replace("../../pages/dashboardAdmin/index.html")
             }else{
