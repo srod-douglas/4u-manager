@@ -1,0 +1,76 @@
+.bt-blue{
+    width: 8.875rem;
+    height: 2.563rem;
+    border: 1px solid var(--color-blue);
+    background-color: var(--color-white);
+    color: var(--color-blue);
+}
+
+.bt-blue:hover{
+    color: var(--color-white);
+    background-color: var(--color-blue);
+}
+
+.bt-blue-inverse{
+    width: 8.875rem;
+    height: 2.563rem;
+    border: 1px solid var(--color-blue);
+    color: var(--color-white);
+    background-color: var(--color-blue);
+}
+
+.bt-green{
+    width: 8.875rem;
+    height: 2.563rem;
+    border: 1px solid var(--color-green);
+    background-color: var(--color-white);
+    color: var(--color-green);
+}
+
+.bt-green:hover{
+    color: var(--color-white);
+    background-color: var(--color-green);
+}
+
+.bt-red{
+    width: 8.875rem;
+    height: 2.563rem;
+    border: 1px solid var(--color-red);
+    background-color: var(--color-white);
+    color: var(--color-red);
+}
+
+.bt-red:hover{
+    color: var(--color-white);
+    background-color: var(--color-red);
+}
+
+.toastfy-red{
+    width: 12.9rem;
+    height: 4.25rem;
+    border: 1px solid var(--color-red);
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+
+.toastfy-green{
+    width: 12.9rem;
+    height: 4.25rem;
+    border: 1px solid var(--color-green);
+    background-color: var(--color-green);
+    color: var(--color-white);
+}
+
+.bt-blue-radius{
+    width: 5.8rem;
+    height: 2rem;
+    border: 1px solid var(--color-blue);
+    border-radius: 16rem;
+    background-color: var(--color-white);
+    color: var(--color-blue);
+}
+
+.bt-blue-radius:hover{
+    color: var(--color-white);
+    background-color: var(--color-blue);
+}
