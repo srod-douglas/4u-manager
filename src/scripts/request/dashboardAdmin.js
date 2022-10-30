@@ -42,4 +42,6 @@ async function dataUsers (token) {
     }
 }
 
+
+
 export { dataCompanies, dataUsers }
