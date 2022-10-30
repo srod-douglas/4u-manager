@@ -59,6 +59,7 @@ async function renderAllUsers (data) {
     const users = await data
 
     const ul = document.querySelector("#registeredUsers")
+    ul.innerHTML = ""
 
     users.forEach((user) => {
 
