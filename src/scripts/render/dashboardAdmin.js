@@ -27,14 +27,20 @@ async function renderAllCompanies (response) {
         departmentDescription.innerText = companie.description
         companyName.innerText = companie.companies.name
 
+        btView.classList.add("bt-view-department")
         btView.src = '../../assets/img/eye-solid.svg'
         btView.alt = 'Icone de visualização'
+        btView.id = companie.uuid
 
+        btEdit.classList.add("bt-edit-department")
         btEdit.src = '../../assets/img/pen-to-square-solid.svg'
         btEdit.alt = 'Icone de editar'
+        btEdit.id = companie.uuid
 
+        btDelete.classList.add("bt-del-department")
         btDelete.src = '../../assets/img/trash-can-solid.svg'
         btDelete.alt = 'Icone de excluir'
+        btDelete.id = companie.uuid
 
         divBts.append(btView, btEdit, btDelete)
         divInfos.append(departmentName, departmentDescription, companyName)
@@ -75,11 +81,15 @@ async function renderAllUsers (data) {
             company.innerText = ""
         }
 
+        btEdit.classList.add("bt-edit-user")
         btEdit.src = '../../assets/img/pen-to-square-solid.svg'
         btEdit.alt = 'Icone para editar'
+        btEdit.id = user.uuid
 
+        btDel.classList.add("bt-del-user")
         btDel.src = '../../assets/img/trash-can-solid.svg'
         btDel.alt = 'Icone para excluir'
+        btDel.id = user.uuid
 
         if(!user.is_admin){
             divBts.append(btEdit, btDel)
