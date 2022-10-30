@@ -62,7 +62,7 @@ async function toastEditProfileUser (user) {
             password: event.target.children[2].value
         }
         const token = getTokenLocal()
-        refreshDataUser(JSON.stringify(body), token.token)
+        await refreshDataUser(body, token.token)
         background.innerHTML = "" /* CHANGE TO CLASS HIDDEN */
         window.location.reload()
     })

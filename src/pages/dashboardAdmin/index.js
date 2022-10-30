@@ -1,4 +1,4 @@
-import { editUserFromAdmin } from "../../scripts/toastAdmin.js";
+import { editUserFromAdmin, toastDeleteUser } from "../../scripts/toastAdmin.js";
 import { getTokenLocal } from "../../scripts/localStorage.js";
 import { 
     renderAllCompanies, 
@@ -36,4 +36,17 @@ setTimeout(() => {
             })
         })
     })
-}, 200);
+
+    const btsDeleteUser = document.querySelectorAll(".bt-del-user")
+    btsDeleteUser.forEach((bt) => {
+        bt.addEventListener("click", async () => {
+            const idUser = bt.id
+            const allUsers = await dataUsers(token.token)
+            allUsers.forEach( async (user) => {
+                if(idUser == user.uuid){
+                    toastDeleteUser(user)
+                }
+            })
+            })
+        })
+}, 200)

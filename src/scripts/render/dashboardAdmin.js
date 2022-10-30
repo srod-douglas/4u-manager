@@ -1,8 +1,5 @@
-
-
-
-
-
+import { dataCompanies } from "../request/dashboardAdmin.js"
+import { getTokenLocal } from '../localStorage.js'
 
 async function renderAllCompanies (response) {
     const data = await response
@@ -54,14 +51,13 @@ async function renderAllCompanies (response) {
 }
 
 
-
 async function renderAllUsers (data) {
     const users = await data
 
     const ul = document.querySelector("#registeredUsers")
     ul.innerHTML = ""
 
-    users.forEach((user) => {
+    users.forEach( async (user) => {
 
         const card = document.createElement("li")
         const divInfos = document.createElement("div")
@@ -80,6 +76,12 @@ async function renderAllUsers (data) {
 
         if(user.department_uuid == null){
             company.innerText = ""
+        }else{
+            const token = getTokenLocal()
+            const allCompanies = await dataCompanies(token.token)
+            allCompanies.forEach((companyUser) => {
+                company.innerText = companyUser.companies.name
+            })
         }
 
         btEdit.classList.add("bt-edit-user")
@@ -104,7 +106,5 @@ async function renderAllUsers (data) {
     })
 
 }
-
-
 
 export { renderAllCompanies, renderAllUsers }
