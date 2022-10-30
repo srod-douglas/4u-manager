@@ -1,7 +1,7 @@
 import { getTokenLocal } from '../../scripts/localStorage.js'
 import { createUser } from '../../scripts/render/dashboardUser.js'
 import { getDataUser } from '../../scripts/request/dashboardUser.js'
-import { toastEditProfileUser } from '../../scripts/toast.js'
+import { toastEditProfileUser } from '../../scripts/toastUser.js'
 
 
 const token = getTokenLocal()

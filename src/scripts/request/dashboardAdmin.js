@@ -1,4 +1,4 @@
-import { urlAllUsers, urlDepartments } from "../path.js";
+import { urlAllUsers, urlDepartments, urlUpdateUser } from "../path.js";
 
 
 async function dataCompanies (token) {
@@ -44,4 +44,27 @@ async function dataUsers (token) {
 
 
 
-export { dataCompanies, dataUsers }
+async function refreshDataUser (idUser, body, tokenAdmin) {
+    const request = await fetch(`${urlUpdateUser}${idUser}`,{
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenAdmin}`
+        },
+        body: JSON.stringify(body)
+    })
+
+    try{
+        if(request.ok){
+            const data = await request.json()
+            console.log(request)
+        }else{
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+export { dataCompanies, dataUsers, refreshDataUser }
