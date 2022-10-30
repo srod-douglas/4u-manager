@@ -1,5 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
-import { refreshDataUser } from './request/dashboardAdmin.js'
+import { renderAllUsers } from './render/dashboardAdmin.js'
+import { dataUsers, refreshDataUser } from './request/dashboardAdmin.js'
 
 
 async function editUserFromAdmin (user) {
@@ -81,8 +82,30 @@ async function editUserFromAdmin (user) {
             const idUser = user.uuid
             const tokenAdmin = getTokenLocal()
             await refreshDataUser(idUser, body, tokenAdmin.token)
-    
+            await renderAllUsers(dataUsers(tokenAdmin.token))
+            background.innerHTML = ""
         })
 }
 
-export { editUserFromAdmin }
+function toastResponse (type, alert, message) {
+    const body = document.querySelector("body")
+
+    const div = document.createElement("div")
+    const title = document.createElement("p")
+    const desc = document.createElement("span")
+
+    if(type == "success"){
+        title.innerText = alert
+        desc.innerText = message
+        
+    }else{
+        title.innerText = alert
+        desc.innerText = message
+    }
+
+    div.append(title, desc)
+    body.appendChild(div)
+
+}
+
+export { toastResponse, editUserFromAdmin }

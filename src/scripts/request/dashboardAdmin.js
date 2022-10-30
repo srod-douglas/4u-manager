@@ -1,4 +1,5 @@
 import { urlAllUsers, urlDepartments, urlUpdateUser } from "../path.js";
+import { toastResponse } from "../toastAdmin.js";
 
 
 async function dataCompanies (token) {
@@ -57,9 +58,11 @@ async function refreshDataUser (idUser, body, tokenAdmin) {
     try{
         if(request.ok){
             const data = await request.json()
-            console.log(request)
+            toastResponse("success", "Solicitação efetuada", "Usuário editado com sucesso.")
+            return data
         }else{
-            console.log(request)
+            toastResponse("error", "Algo deu errado.", "Por favor, atualize a página e tente novamente.")
+            return
         }
     }catch(err){
         console.log(err)
