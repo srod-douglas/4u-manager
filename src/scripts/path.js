@@ -8,5 +8,18 @@ const urlRefreshUser = 'http://localhost:6278/users'
 const urlDepartments = 'http://localhost:6278/departments'
 const urlAllUsers = 'http://localhost:6278/users'
 const urlUpdateUser = 'http://localhost:6278/admin/update_user/'
+const urlDeleteUser = 'http://localhost:6278/admin/delete_user/'
 
-export { urlAllCompanies, urlSectors, urlCreateNewUser, urlVerifyAdmin, urlLogin, InfosUserLogged, urlRefreshUser, urlDepartments, urlAllUsers, urlUpdateUser }
+
+export { urlAllCompanies, 
+    urlSectors, 
+    urlCreateNewUser, 
+    urlVerifyAdmin, 
+    urlLogin, 
+    InfosUserLogged, 
+    urlRefreshUser, 
+    urlDepartments, 
+    urlAllUsers, 
+    urlUpdateUser, 
+    urlDeleteUser 
+}

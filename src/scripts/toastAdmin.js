@@ -1,6 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
 import { renderAllUsers } from './render/dashboardAdmin.js'
-import { dataUsers, refreshDataUser } from './request/dashboardAdmin.js'
+import { dataUsers, deleteDataUser, refreshDataUser } from './request/dashboardAdmin.js'
 
 
 async function editUserFromAdmin (user) {
@@ -102,10 +102,54 @@ function toastResponse (type, alert, message) {
         title.innerText = alert
         desc.innerText = message
     }
-
+    
     div.append(title, desc)
     body.appendChild(div)
+    setTimeout(() => {
+        window.location.reload()
+    }, 4000);
 
 }
 
-export { toastResponse, editUserFromAdmin }
+
+function toastDeleteUser (user) {
+
+    const body = document.querySelector("body")
+    const background = document.createElement("div")
+    const toast = document.createElement("div")
+
+    background.classList.add("background-delete-user")
+    toast.classList.add("toast-delete-user")
+
+    const divTitle = document.createElement("div")
+    const title = document.createElement("h2")
+    const btCloseModal = document.createElement("span")
+    const btDeleteUser = document.createElement("button")
+
+    divTitle.classList.add("div-title-delete-user")
+    title.classList.add("title-delete-user")
+    btCloseModal.classList.add("bt-cancel-delete-user")
+    btDeleteUser.classList.add("bt-confirm-delete-user")
+
+    title.innerText = `Realmente deseja remover o usuário ${user.username}?`
+    btCloseModal.innerText = "x"
+
+    btDeleteUser.innerText = "Confirmar"
+
+    divTitle.append(title, btCloseModal)
+    toast.append(divTitle, btDeleteUser)
+
+    background.appendChild(toast)
+
+    body.appendChild(background)
+
+    btDeleteUser.onclick = () => {
+        deleteDataUser(user.uuid)
+        background.innerHTML = ""
+        setTimeout(() => {
+            window.location.reload()
+        }, 4000);
+    }
+}
+
+export { toastResponse, editUserFromAdmin, toastDeleteUser }

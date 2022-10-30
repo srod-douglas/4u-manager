@@ -24,13 +24,15 @@ async function getDataUser (token) {
 }
 
 async function refreshDataUser (body, token) {
+    console.log(body)
+    console.log(token)
     const request = await fetch(urlRefreshUser, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: body,
+        body: JSON.stringify(body),
     })
 
     try{
@@ -39,7 +41,7 @@ async function refreshDataUser (body, token) {
             const newData = await request.json()
             createUser(newData)
         }else{
-            console.log(request.message)
+            console.log(request)
         }
 
     }catch(err){
