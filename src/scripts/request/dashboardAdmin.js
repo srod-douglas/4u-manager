@@ -130,6 +130,7 @@ async function departmentsFromCompanySelected (idCompany) {
 
         if(request.ok){
             const departments = await request.json()
+            console.log(departments)
             return departments
         }else{
             console.log(request)
@@ -163,6 +164,32 @@ async function deleteDepartment (idDepartment) {
     }
 }
 
+
+async function createDepartment (body) {
+    const token = getTokenLocal()
+    const request = await fetch(urlDepartments, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.token}`
+        },
+        body: JSON.stringify(body)
+    })
+    console.log(JSON.stringify(body))
+
+    try{
+        if(request.ok){
+            const success = await request.json()
+            console.log(success)
+        }else{
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
 export { 
     dataCompanies, 
     dataUsers, 
@@ -170,5 +197,6 @@ export {
     deleteDataUser, 
     departmentsFromCompanySelected,
     allDepartments,
-    deleteDepartment
+    deleteDepartment,
+    createDepartment
 }
