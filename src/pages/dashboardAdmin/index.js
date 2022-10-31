@@ -1,4 +1,4 @@
-import { editUserFromAdmin, toastDeleteDepartment, toastDeleteUser } from "../../scripts/toastAdmin.js";
+import { editUserFromAdmin, toastCreateDepartment, toastDeleteDepartment, toastDeleteUser } from "../../scripts/toastAdmin.js";
 import { getTokenLocal } from "../../scripts/localStorage.js";
 import { 
     filterCompanies,
@@ -62,5 +62,9 @@ setTimeout(() => {
             })
         })
 
+        const btCreateDepartment = document.querySelector("#new-department")
+        btCreateDepartment.onclick = async () => {
+            await toastCreateDepartment(dataCompanies(token.token))
+        }
         
 }, 100)
