@@ -1,7 +1,5 @@
 import { InfosUserLogged, urlRefreshUser } from "../path.js";
-import { createUser, renderUserNotWorks } from "../render/dashboardUser.js";
-
-
+import { createUser } from "../render/dashboardUser.js";
 
 async function getDataUser (token) {
     const request = await fetch(InfosUserLogged,{

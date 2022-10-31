@@ -1,6 +1,5 @@
 import { sectors, companies } from "../request/filter.js";
 
-
 function renderCompaniesHome () {
     const reference = document.querySelector("#registeredCompanies")
     reference.innerHTML = ""
@@ -52,8 +51,6 @@ function renderFilteredSector (choices){
             reference.append(name, opening, sector)
         })
     }
-
 }
-
 
 export { renderCompaniesHome, renderSectorsHome, renderFilteredSector }

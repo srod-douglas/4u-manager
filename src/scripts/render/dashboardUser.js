@@ -1,16 +1,11 @@
-
-
 async function createUser (data) {
     const responseData = await data
 
     if(responseData.department_uuid == null){
         renderUserNotWorks(responseData)
-
     }else{
         renderUserWorks(responseData)
-
     }
-
 }
 
 function renderUserNotWorks (user) {
@@ -34,7 +29,6 @@ function renderUserNotWorks (user) {
         level.innerText = ""
     }
 
-
     const icon = document.createElement("img")
     icon.classList.add("icon-edit")
     icon.src = '../../assets/img/pen-to-square-solid.svg'
@@ -47,10 +41,7 @@ function renderUserNotWorks (user) {
     divName.append(name, icon)
     divInfosUser.append(email, level)
     secCompanie.appendChild(message)
-
 }
-
-
 
 function renderUserWorks () {
 

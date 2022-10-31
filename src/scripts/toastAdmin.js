@@ -2,7 +2,6 @@ import { getTokenLocal } from './localStorage.js'
 import { renderAllUsers } from './render/dashboardAdmin.js'
 import { dataUsers, deleteDataUser, refreshDataUser } from './request/dashboardAdmin.js'
 
-
 async function editUserFromAdmin (user) {
 
         const body = document.querySelector("body")
@@ -110,7 +109,6 @@ function toastResponse (type, alert, message) {
     }, 4000);
 
 }
-
 
 function toastDeleteUser (user) {
 

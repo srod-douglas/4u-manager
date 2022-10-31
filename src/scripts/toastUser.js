@@ -1,10 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
 import { refreshDataUser } from './request/dashboardUser.js'
 
-/* function toast (message){
-    
-} */
-
 async function toastEditProfileUser (user) {
 
     const dataUser = await user
@@ -66,11 +62,6 @@ async function toastEditProfileUser (user) {
         background.innerHTML = "" /* CHANGE TO CLASS HIDDEN */
         window.location.reload()
     })
-
 }
-
-
-
-
 
 export { toastEditProfileUser }

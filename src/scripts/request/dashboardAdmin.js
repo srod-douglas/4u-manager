@@ -1,9 +1,14 @@
-import { urlAllUsers, urlDeleteUser, urlDepartments, urlUpdateUser } from "../path.js";
+import { urlAllCompanies, 
+    urlAllUsers, 
+    urlDeleteUser, 
+    urlDepartments, 
+    urlUpdateUser 
+} from "../path.js";
 import { toastResponse } from "../toastAdmin.js";
 import { getTokenLocal } from '../localStorage.js'
 
 async function dataCompanies (token) {
-    const request = await fetch(urlDepartments,{
+    const request = await fetch(urlAllCompanies,{
         method: "GET",
         headers:{
             Authorization: `Bearer ${token}`,
@@ -13,6 +18,7 @@ async function dataCompanies (token) {
     try{
         if(request.ok){
             const data = await request.json()
+
             return data
         }else{
             console.log(request)
@@ -21,7 +27,6 @@ async function dataCompanies (token) {
         console.log(err)
     }
 }
-
 
 async function dataUsers (token) {
     const request = await fetch(urlAllUsers,{
@@ -42,8 +47,6 @@ async function dataUsers (token) {
         console.log(err)
     }
 }
-
-
 
 async function refreshDataUser (idUser, body, tokenAdmin) {
     const request = await fetch(`${urlUpdateUser}${idUser}`,{
@@ -91,4 +94,57 @@ async function deleteDataUser (idUser) {
     }
 }
 
-export { dataCompanies, dataUsers, refreshDataUser, deleteDataUser }
+async function allDepartments (tokenAdmin) {
+    const request = await fetch(urlDepartments, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${tokenAdmin}`
+        }
+    })
+
+    try{
+
+        if(request.ok){
+            const departments = await request.json()
+            console.log(departments)
+            return departments
+        }else{
+            console.log(request)
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function departmentsFromCompanySelected (idCompany) {
+    const token = getTokenLocal()
+    const request = await fetch(`${urlDepartments}/${idCompany}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token.token}`
+        }
+    })
+
+    try{
+
+        if(request.ok){
+            const departments = await request.json()
+            return departments
+        }else{
+            console.log(request)
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export { 
+    dataCompanies, 
+    dataUsers, 
+    refreshDataUser, 
+    deleteDataUser, 
+    departmentsFromCompanySelected,
+    allDepartments
+}

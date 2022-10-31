@@ -1,8 +1,9 @@
-import { dataCompanies } from "../request/dashboardAdmin.js"
+import { dataCompanies, departmentsFromCompanySelected } from "../request/dashboardAdmin.js"
 import { getTokenLocal } from '../localStorage.js'
 
-async function renderAllCompanies (response) {
+async function renderAllDepartaments (response) {
     const data = await response
+
     const ul = document.querySelector("#departments")
     ul.innerHTML = ""
     data.forEach((companie) => {
@@ -47,7 +48,6 @@ async function renderAllCompanies (response) {
         ul.appendChild(card)
 
     })
-
 }
 
 
@@ -80,7 +80,7 @@ async function renderAllUsers (data) {
             const token = getTokenLocal()
             const allCompanies = await dataCompanies(token.token)
             allCompanies.forEach((companyUser) => {
-                company.innerText = companyUser.companies.name
+                company.innerText = companyUser.name
             })
         }
 
@@ -107,4 +107,90 @@ async function renderAllUsers (data) {
 
 }
 
-export { renderAllCompanies, renderAllUsers }
+
+async function filterCompanies (dataCompanies) {
+    const data = await dataCompanies
+    const select = document.querySelector("#companies")
+
+    data.forEach(async (company) => {
+        
+            const option = document.createElement("option")
+            option.setAttribute("value", `${company.uuid}`)
+            option.innerText = await company.name
+
+            select.appendChild(option)
+        })
+    
+    select.addEventListener("change", async event => {
+        const idDepartment = event.target.value
+        console.log(idDepartment)
+        const data = await departmentsFromCompanySelected(idDepartment)
+        const token = getTokenLocal()
+        if(data.length == 0){
+            renderInfoNoDepartments()
+        }else{
+            await renderFilteredDepartment(data)
+        }
+    })
+}
+
+
+async function renderFilteredDepartment (response) {
+    const data = await response
+
+    const ul = document.querySelector("#departments")
+    ul.innerHTML = ""
+    data.forEach((companie) => {
+        
+        const card = document.createElement("li")
+        const divInfos = document.createElement("div")
+        const divBts = document.createElement("div")
+
+        const departmentName = document.createElement("h3")
+        const departmentDescription = document.createElement("p")
+        const companyName = document.createElement("span")
+        
+        const btView = document.createElement("img")
+        const btEdit = document.createElement("img")
+        const btDelete = document.createElement("img")
+
+        departmentName.innerText = companie.name
+        departmentDescription.innerText = companie.description
+        companyName.innerText = companie.companies.name
+
+        btView.classList.add("bt-view-department")
+        btView.src = '../../assets/img/eye-solid.svg'
+        btView.alt = 'Icone de visualização'
+        btView.id = companie.uuid
+
+        btEdit.classList.add("bt-edit-department")
+        btEdit.src = '../../assets/img/pen-to-square-solid.svg'
+        btEdit.alt = 'Icone de editar'
+        btEdit.id = companie.uuid
+
+        btDelete.classList.add("bt-del-department")
+        btDelete.src = '../../assets/img/trash-can-solid.svg'
+        btDelete.alt = 'Icone de excluir'
+        btDelete.id = companie.uuid
+
+        divBts.append(btView, btEdit, btDelete)
+        divInfos.append(departmentName, departmentDescription, companyName)
+
+        card.append(divInfos, divBts)
+
+        ul.appendChild(card)
+
+    })
+}
+
+
+function renderInfoNoDepartments () {
+    const ul = document.querySelector("#departments")
+    ul.innerHTML = ""
+    const title = document.createElement("h2")
+    title.innerText = "A empresa não possui departamentos."
+    ul.appendChild(title)
+}
+
+
+export { renderAllDepartaments, renderAllUsers, filterCompanies, renderFilteredDepartment }
