@@ -140,11 +140,35 @@ async function departmentsFromCompanySelected (idCompany) {
     }
 }
 
+
+async function deleteDepartment (idDepartment) {
+    const token = getTokenLocal()
+    const request = await fetch(`${urlDepartments}/${idDepartment}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token.token}`
+        }
+    })
+
+    try{
+
+        if(request.ok){
+            console.log(request)
+        }else{
+            console.log(request)
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
 export { 
     dataCompanies, 
     dataUsers, 
     refreshDataUser, 
     deleteDataUser, 
     departmentsFromCompanySelected,
-    allDepartments
+    allDepartments,
+    deleteDepartment
 }

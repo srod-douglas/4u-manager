@@ -36,6 +36,7 @@ async function renderAllDepartaments (response) {
         btEdit.id = companie.uuid
 
         btDelete.classList.add("bt-del-department")
+        btDelete.dataset.path = `${departmentName.innerText}`
         btDelete.src = '../../assets/img/trash-can-solid.svg'
         btDelete.alt = 'Icone de excluir'
         btDelete.id = companie.uuid
