@@ -1,6 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
 import { renderAllUsers } from './render/dashboardAdmin.js'
-import { dataUsers, deleteDataUser, refreshDataUser } from './request/dashboardAdmin.js'
+import { dataUsers, deleteDataUser, deleteDepartment, refreshDataUser } from './request/dashboardAdmin.js'
 
 async function editUserFromAdmin (user) {
 
@@ -150,4 +150,46 @@ function toastDeleteUser (user) {
     }
 }
 
-export { toastResponse, editUserFromAdmin, toastDeleteUser }
+
+function toastDeleteDepartment (idDepartment, nameDepartment) {
+    const body = document.querySelector("body")
+    const background = document.createElement("div")
+    const toast = document.createElement("div")
+
+    background.classList.add("background-delete-department")
+    toast.classList.add("toast-delete-department")
+
+    const divTitle = document.createElement("div")
+    const title = document.createElement("h2")
+    const btCloseModal = document.createElement("span")
+    const btDeleteDepartment = document.createElement("button")
+
+    divTitle.classList.add("div-title-delete-department")
+    title.classList.add("title-delete-department")
+    btCloseModal.classList.add("bt-cancel-delete-department")
+    btDeleteDepartment.classList.add("bt-confirm-delete-department")
+
+    title.innerText = `Realmente deseja deletar o departamento ${nameDepartment} e demitir seus funcionários?`
+    btCloseModal.innerText = "x"
+
+    btDeleteDepartment.innerText = "Confirmar"
+
+    divTitle.append(title, btCloseModal)
+    toast.append(divTitle, btDeleteDepartment)
+
+    background.appendChild(toast)
+
+    body.appendChild(background)
+
+    btDeleteDepartment.onclick = () => {
+        deleteDepartment(idDepartment)
+        background.innerHTML = ""
+        setTimeout(() => {
+            window.location.reload()
+        }, 4000);
+    }
+}
+
+
+
+export { toastResponse, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment }

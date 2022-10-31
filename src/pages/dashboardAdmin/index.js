@@ -1,4 +1,4 @@
-import { editUserFromAdmin, toastDeleteUser } from "../../scripts/toastAdmin.js";
+import { editUserFromAdmin, toastDeleteDepartment, toastDeleteUser } from "../../scripts/toastAdmin.js";
 import { getTokenLocal } from "../../scripts/localStorage.js";
 import { 
     filterCompanies,
@@ -6,7 +6,7 @@ import {
     renderAllUsers 
 } from "../../scripts/render/dashboardAdmin.js";
 import { allDepartments, dataCompanies, 
-    dataUsers
+    dataUsers, deleteDepartment
 } from "../../scripts/request/dashboardAdmin.js";
 
 
@@ -53,5 +53,14 @@ setTimeout(() => {
             })
         })
 
+        const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
+        btsDeleteDepartment.forEach((bt)=>{
+            bt.addEventListener("click", event => {
+                console.log(event.target)
+                toastDeleteDepartment(bt.id, bt.dataset.path)
+                /* deleteDepartment(bt.id) */
+            })
+        })
+
         
-}, 200)
+}, 100)
