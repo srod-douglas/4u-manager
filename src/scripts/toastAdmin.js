@@ -279,18 +279,19 @@ async function toastCreateDepartment (allCompanies) {
             setTimeout(() => {
                 
                 if(failed.includes("Fail")){
-                    console.log("Departamento já existe")
+                    toastResponse("Fail", "O departamento já existe.", "Por favor, crie um departamento inexistente.")
                 }else{
-                    console.log(newName)
-                    console.log(event.target.children[1].value)
-                    console.log(choice)
-                    console.log("Departamento criado com sucesso")
+                    toastResponse("Success", "Solicitação bem sucedida!", "Departamento criado com sucesso.")
+
                     const body = {
                         name: newName,
                         description: description,
                         company_uuid: choice
                     }
                     createDepartment(body)
+                    setTimeout(() => {
+                        window.location.reload()
+                    },4000)
                     /* chamar função de criar departamento */
                 }
             }, 100);

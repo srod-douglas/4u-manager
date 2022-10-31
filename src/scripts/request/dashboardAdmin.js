@@ -175,12 +175,12 @@ async function createDepartment (body) {
         },
         body: JSON.stringify(body)
     })
-    console.log(JSON.stringify(body))
+
 
     try{
         if(request.ok){
             const success = await request.json()
-            console.log(success)
+            return success
         }else{
             console.log(request)
         }
