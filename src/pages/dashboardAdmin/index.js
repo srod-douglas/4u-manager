@@ -1,17 +1,20 @@
 import { editUserFromAdmin, toastDeleteUser } from "../../scripts/toastAdmin.js";
 import { getTokenLocal } from "../../scripts/localStorage.js";
 import { 
-    renderAllCompanies, 
+    filterCompanies,
+    renderAllDepartaments, 
     renderAllUsers 
 } from "../../scripts/render/dashboardAdmin.js";
-import { dataCompanies, 
+import { allDepartments, dataCompanies, 
     dataUsers
 } from "../../scripts/request/dashboardAdmin.js";
 
 
 const token = getTokenLocal()
-renderAllCompanies(dataCompanies(token.token))
+renderAllDepartaments(allDepartments(token.token))
 renderAllUsers(dataUsers(token.token))
+filterCompanies(dataCompanies(token.token))
+
 
 const logout = document.querySelector("#logout")
 logout.onclick = () => {
@@ -49,4 +52,6 @@ setTimeout(() => {
             })
             })
         })
+
+        
 }, 200)

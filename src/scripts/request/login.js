@@ -1,7 +1,6 @@
 import { urlLogin, urlVerifyAdmin } from '../path.js'
 import { setTokenLocal, setUserLocal } from '../localStorage.js'
 
-
 async function checkLogin (body) {
     const request = await fetch(urlLogin, {
         method: "POST",

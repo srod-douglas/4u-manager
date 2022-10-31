@@ -15,7 +15,6 @@ async function registerNewUser (body) {
             const data = await request.json()
             /* call modal */
             window.location.assign("../../pages/login/index.html")
-
         }
 
     }catch(err){

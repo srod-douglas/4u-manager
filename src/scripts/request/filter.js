@@ -1,7 +1,5 @@
 import { urlAllCompanies, urlSectors  } from "../path.js";
 
-
-
 async function getAllCompanies () {
     const request = await fetch(urlAllCompanies)
 
@@ -14,8 +12,6 @@ async function getAllCompanies () {
         throw console.error(err.message)
     }
 }
-
-
 
 async function getAllSectors () {
     const request = await fetch(urlSectors)
@@ -31,7 +27,6 @@ async function getAllSectors () {
         throw console.error(err)
     }
 }
-
 
 async function getSectorClicked (sector) {
 
@@ -49,9 +44,7 @@ async function getSectorClicked (sector) {
     }
 }
 
-
 const sectors = await getAllSectors()
 const companies = await getAllCompanies()
-
 
 export { companies, sectors, getSectorClicked }
