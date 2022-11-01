@@ -119,7 +119,7 @@ function toastResponse (type, alert, message) {
     body.appendChild(div)
     setTimeout(() => {
         window.location.reload()
-    }, 400000);
+    }, 4000);
 
 }
 
@@ -367,6 +367,12 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
 
 async function toastViewDepartment (department) {
 
+    const divContRight = document.querySelectorAll(".div-view-container-right")
+    divContRight.forEach((div)=>{
+
+        div.innerHTML=""
+    })
+
     const body = document.querySelector("body")
     const background = document.createElement("div")
     const toast = document.createElement("div")
@@ -443,8 +449,6 @@ async function toastViewDepartment (department) {
 
             const idUser = select.selectedOptions[0].id
 
-/*             console.log(idUser)
-            console.log(departmentId) */
             btContract.onclick = (event) => {
                 event.preventDefault()
 

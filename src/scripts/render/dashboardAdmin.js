@@ -1,5 +1,6 @@
 import { allDepartments, dataCompanies, departmentsFromCompanySelected } from "../request/dashboardAdmin.js"
 import { getTokenLocal } from '../localStorage.js'
+import { toastViewDepartment } from '../toastAdmin.js'
 
 
 async function renderAllDepartaments (response) {
@@ -147,6 +148,7 @@ async function renderFilteredDepartment (response) {
 
     const ul = document.querySelector("#departments")
     ul.innerHTML = ""
+
     data.forEach((companie) => {
         
         const card = document.createElement("li")
@@ -188,6 +190,23 @@ async function renderFilteredDepartment (response) {
         ul.appendChild(card)
 
     })
+    const token = getTokenLocal()
+    const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
+    btsViewerDepartments.forEach((bt) => {
+        bt.addEventListener("click",async (event) => {
+            
+            event.preventDefault()
+            
+            const allDepts = await allDepartments(token.token)
+            allDepts.forEach(async(department) => {
+                const idDepartment = await department.uuid
+                if(idDepartment == event.target.id){
+
+                    toastViewDepartment(department)
+                }
+            })
+        }
+    )})
 }
 
 

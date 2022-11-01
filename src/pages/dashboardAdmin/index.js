@@ -88,6 +88,12 @@ setTimeout(() => {
                     const idDepartment = await department.uuid
                     if(idDepartment == event.target.id){
 
+                        const divContRight = document.querySelectorAll(".div-view-container-right")
+                        divContRight.forEach((div)=>{
+
+                            div.innerHTML=""
+                        })
+
                         toastViewDepartment(department)
                     }
                 })
