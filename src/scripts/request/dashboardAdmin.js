@@ -1,4 +1,4 @@
-import { urlAllCompanies, 
+import { urlAdmitUser, urlAllCompanies, 
     urlAllUsers, 
     urlDeleteUser, 
     urlDepartments, 
@@ -106,7 +106,7 @@ async function allDepartments (tokenAdmin) {
 
         if(request.ok){
             const departments = await request.json()
-            console.log(departments)
+
             return departments
         }else{
             console.log(request)
@@ -214,6 +214,55 @@ async function editDescriptionDepartment (description, idDepartment){
 }
 
 
+async function usersNotWorking () {
+    const token = getTokenLocal()
+    const request = await fetch(urlAllUsers, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token.token}`
+        }
+    })
+
+    try{
+        if(request.ok){
+            const users = await request.json()
+            return users
+        }else{
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+async function admitUser (body) {
+    const token = getTokenLocal()
+    const request = await fetch(urlAdmitUser, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.token}`
+        },
+        body: JSON.stringify(body)
+    })
+
+    try{
+        if(request.ok){
+            const admited = await request.json()
+            toastResponse("success", "Solicitação bem sucedida.", "Usuário contratado.")
+            return admited
+        }else{
+            toastResponse("error", "Solicitação cancelada.", "O usuário já foi contratado.")
+            console.log(request)
+        }
+    }catch(err){
+
+    }
+}
+
+
+
 export { 
     dataCompanies, 
     dataUsers, 
@@ -223,5 +272,7 @@ export {
     allDepartments,
     deleteDepartment,
     createDepartment,
-    editDescriptionDepartment
+    editDescriptionDepartment,
+    usersNotWorking,
+    admitUser
 }
