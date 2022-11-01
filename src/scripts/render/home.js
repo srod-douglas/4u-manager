@@ -5,15 +5,21 @@ function renderCompaniesHome () {
     reference.innerHTML = ""
     companies.forEach((companie)=>{
 
+        const li = document.createElement("li")
         const name = document.createElement("h1")
         const opening = document.createElement("p")
         const sector = document.createElement("span")
+        li.classList.add("card-company-home")
+        name.classList.add("name-company")
+        opening.classList.add("open-hour-company")
+        sector.classList.add("sector-company")
 
         name.innerText = companie.name
         opening.innerText = companie.opening_hours
         sector.innerText = companie.sectors.description
 
-        reference.append(name, opening, sector)
+        li.append(name, opening, sector)
+        reference.appendChild(li)
     })
 }
 
@@ -39,16 +45,23 @@ function renderFilteredSector (choices){
     if(choices !== undefined){
 
             choices.forEach( (companie)=>{
-    
+            const li = document.createElement("li")
             const name = document.createElement("h1")
             const opening = document.createElement("p")
             const sector = document.createElement("span")
     
+            li.classList.add("card-company-home")
+            name.classList.add("name-company")
+            opening.classList.add("open-hour-company")
+            sector.classList.add("sector-company")
+
             name.innerText =  companie.name
             opening.innerText =  companie.opening_hours
-            sector.innerText =  companie.description
-    
-            reference.append(name, opening, sector)
+            sector.innerText =  companie.sectors.description
+            
+            li.append(name, opening, sector)
+            reference.appendChild(li)
+
         })
     }
 }
