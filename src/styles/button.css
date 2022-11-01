@@ -4,6 +4,7 @@
     border: 1px solid var(--color-blue);
     background-color: var(--color-white);
     color: var(--color-blue);
+    transition: .5s;
 }
 
 .bt-blue:hover{
@@ -17,6 +18,12 @@
     border: 1px solid var(--color-blue);
     color: var(--color-white);
     background-color: var(--color-blue);
+    transition: .5s;
+}
+
+.bt-blue-inverse:hover{
+    color: var(--color-blue);
+    background-color: var(--color-white);
 }
 
 .bt-green{
