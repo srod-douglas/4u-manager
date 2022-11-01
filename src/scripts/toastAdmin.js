@@ -10,7 +10,8 @@ import {
     refreshDataUser, 
     editDescriptionDepartment,
     usersNotWorking,
-    admitUser
+    admitUser,
+    dataUsersFromDepartment
 } from './request/dashboardAdmin.js'
 
 
@@ -27,7 +28,7 @@ async function editUserFromAdmin (user) {
         const divTitle = document.createElement("div")
         divTitle.classList.add("div-title")
         const title = document.createElement("h2")
-        const btCloseModal = document.createElement("button")
+        const btCloseModal = document.createElement("span")
         
         const divForm = document.createElement("div")
         divForm.classList.add("div-form")
@@ -96,6 +97,11 @@ async function editUserFromAdmin (user) {
             await refreshDataUser(idUser, body, tokenAdmin.token)
             await renderAllUsers(dataUsers(tokenAdmin.token))
             background.innerHTML = ""
+        })
+
+        btCloseModal.addEventListener("click", () =>{
+            background.innerHTML = ""
+            background.classList.remove("toast-background")
         })
 }
 
@@ -367,7 +373,7 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
 
 async function toastViewDepartment (department) {
 
-    const divContRight = document.querySelectorAll(".div-view-container-right")
+    const divContRight = document.querySelectorAll(".background-view-department")
     divContRight.forEach((div)=>{
 
         div.innerHTML=""
@@ -376,9 +382,11 @@ async function toastViewDepartment (department) {
     const body = document.querySelector("body")
     const background = document.createElement("div")
     const toast = document.createElement("div")
+    const secContainers = document.createElement("section")
 
     background.classList.add("background-view-department")
     toast.classList.add("toast-view-department")
+    secContainers.classList.add("sec-containers-modal")
 
     const divTitle = document.createElement("div")
     const title = document.createElement("h2")
@@ -391,6 +399,7 @@ async function toastViewDepartment (department) {
     title.innerText = department.name
     btCloseModal.innerText = "x"
     
+    divTitle.append(title, btCloseModal)
 
     const divContainerLeft = document.createElement("div")
     const desc = document.createElement("p")
@@ -402,6 +411,9 @@ async function toastViewDepartment (department) {
 
     desc.innerText = department.description
     company.innerText = department.companies.name
+
+    divContainerLeft.append(desc, company)
+
 
     const divContainerRight = document.createElement("div")
     const select = document.createElement("select")
@@ -437,7 +449,57 @@ async function toastViewDepartment (department) {
     })
 
     divContainerRight.append(select, btContract)
-    body.appendChild(divContainerRight)
+
+
+    const ulActiveUsersDept = document.createElement("ul")
+    ulActiveUsersDept.classList.add("ul-bottom-toast-view-department")
+
+    const usersThisDept = await dataUsersFromDepartment(department)
+    
+    if(usersThisDept.length > 0){
+
+        usersThisDept.forEach((user)=>{
+
+            const li = document.createElement("li")
+    
+            const divInfos = document.createElement("div")
+            divInfos.classList.add("div-infos-users-same-dept")
+    
+            const userName = document.createElement("h2")
+            const level = document.createElement("p")
+            const companyName = document.createElement("span")
+    
+            userName.classList.add("user-dept-name")
+            level.classList.add("user-dept-level")
+            companyName.classList.add("user-dept-company-name")
+    
+            userName.innerText = user.username
+            level.innerText = user.professional_level
+            companyName.innerText = department.companies.name
+    
+    
+            const btTurnOff = document.createElement("button")
+            btTurnOff.classList.add("bt-turn-off-user")
+            btTurnOff.id = "btTurnOff"
+            btTurnOff.innerText = "Desligar"
+    
+            divInfos.append(userName, level, companyName)
+            li.append(divInfos, btTurnOff)
+            ulActiveUsersDept.appendChild(li)
+            toast.appendChild(ulActiveUsersDept)
+        })
+    }else{
+
+        ulActiveUsersDept.innerHTML = ""
+        
+    }
+
+    secContainers.append(divContainerLeft, divContainerRight)
+    toast.append(divTitle, secContainers, ulActiveUsersDept)
+    background.appendChild(toast)
+    body.appendChild(background)
+
+
 
     select.addEventListener("change", event =>{
 
@@ -465,6 +527,13 @@ async function toastViewDepartment (department) {
         }
 
     })
+
+
+    btCloseModal.addEventListener("click", event => {
+        background.innerHTML = ""
+        background.classList.remove("background-view-department")
+        
+        })
 }
 
 

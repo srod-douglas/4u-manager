@@ -264,6 +264,22 @@ console.log(body)
 
 
 
+async function dataUsersFromDepartment (department) {
+    const token = getTokenLocal()
+    const allLoggedUsers = await dataUsers(token.token)
+    const filtered = []
+    allLoggedUsers.forEach(async (user) => {
+
+        if(user.department_uuid == department.uuid){
+            filtered.push(user)
+        }
+
+    })
+    return filtered
+}
+
+
+
 export { 
     allDepartments,
     dataCompanies, 
@@ -275,5 +291,6 @@ export {
     createDepartment,
     editDescriptionDepartment,
     usersNotWorking,
-    admitUser
+    admitUser,
+    dataUsersFromDepartment
 }

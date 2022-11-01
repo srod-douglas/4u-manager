@@ -15,6 +15,9 @@ async function renderAllDepartaments (response) {
         const divInfos = document.createElement("div")
         const divBts = document.createElement("div")
 
+        divInfos.classList.add("div-infos-departments-admin")
+        divBts.classList.add("div-bts-departments-admin")
+
         const departmentName = document.createElement("h3")
         const departmentDescription = document.createElement("p")
         const companyName = document.createElement("span")
@@ -65,6 +68,7 @@ async function renderAllUsers (data) {
         const card = document.createElement("li")
         const divInfos = document.createElement("div")
         const divBts = document.createElement("div")
+        divBts.classList.add("div-bts-edt-del-users")
 
         const name = document.createElement("h2")
         const level = document.createElement("p")
