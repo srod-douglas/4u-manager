@@ -1,4 +1,4 @@
-import { editUserFromAdmin, toastCreateDepartment, toastDeleteDepartment, toastDeleteUser } from "../../scripts/toastAdmin.js";
+import { editUserFromAdmin, toastCreateDepartment, toastDeleteDepartment, toastDeleteUser, toastEditDescriptionDepartment } from "../../scripts/toastAdmin.js";
 import { getTokenLocal } from "../../scripts/localStorage.js";
 import { 
     filterCompanies,
@@ -6,7 +6,7 @@ import {
     renderAllUsers 
 } from "../../scripts/render/dashboardAdmin.js";
 import { allDepartments, dataCompanies, 
-    dataUsers, deleteDepartment
+    dataUsers, deleteDepartment, departmentsFromCompanySelected
 } from "../../scripts/request/dashboardAdmin.js";
 
 
@@ -58,7 +58,7 @@ setTimeout(() => {
             bt.addEventListener("click", event => {
                 console.log(event.target)
                 toastDeleteDepartment(bt.id, bt.dataset.path)
-                /* deleteDepartment(bt.id) */
+                
             })
         })
 
@@ -66,5 +66,18 @@ setTimeout(() => {
         btCreateDepartment.onclick = async () => {
             await toastCreateDepartment(dataCompanies(token.token))
         }
+        const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
+        btsEditDepartments.forEach((bt)=>{
+            bt.onclick = async (event) => {
+                event.preventDefault()
+                const test = await allDepartments(token.token)
+                test.forEach(async(department) => {
+                    const idDepartment = await department.uuid
+                    if(idDepartment == event.target.id){
+                       toastEditDescriptionDepartment(await department.description, idDepartment)
+                    }
+                })
+            }
+        })
         
 }, 100)

@@ -190,6 +190,30 @@ async function createDepartment (body) {
 }
 
 
+async function editDescriptionDepartment (description, idDepartment){
+    const token = getTokenLocal()
+    const request = await fetch(`${urlDepartments}/${idDepartment}`,{
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.token}`
+        },
+        body: JSON.stringify(description)
+    })
+
+    try{
+        if(request.ok){
+            toastResponse("Success", "Solicitação bem sucedida!", "Descrição atualizada com sucesso.")
+        }else{
+            toastResponse("Error", "Algo saiu errado.", "Por favor, tente novamente mais tarde.")
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
 export { 
     dataCompanies, 
     dataUsers, 
@@ -198,5 +222,6 @@ export {
     departmentsFromCompanySelected,
     allDepartments,
     deleteDepartment,
-    createDepartment
+    createDepartment,
+    editDescriptionDepartment
 }
