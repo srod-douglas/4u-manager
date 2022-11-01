@@ -1,6 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
 import { renderAllUsers } from './render/dashboardAdmin.js'
-import { createDepartment, dataUsers, deleteDataUser, deleteDepartment, departmentsFromCompanySelected, refreshDataUser } from './request/dashboardAdmin.js'
+import { createDepartment, dataUsers, deleteDataUser, deleteDepartment, departmentsFromCompanySelected, refreshDataUser, editDescriptionDepartment } from './request/dashboardAdmin.js'
 
 async function editUserFromAdmin (user) {
 
@@ -292,50 +292,65 @@ async function toastCreateDepartment (allCompanies) {
                     setTimeout(() => {
                         window.location.reload()
                     },4000)
-                    /* chamar função de criar departamento */
                 }
             }, 100);
-            
-            
-            
-
     })
+}
 
-    /* select.addEventListener("change", event => {
 
-        allOptions.forEach((opt) => {
-            opt.addEventListener("change", async (event) => {
-                console.log(event.target.id)
-            })
-    })
-    })
-    form.addEventListener("submit", event => {
+function toastEditDescriptionDepartment (oldValues, idDepartment) {
+    const body = document.querySelector("body")
+    const background = document.createElement("div")
+    const toast = document.createElement("div")
+    const divForm = document.createElement("div")
+
+    background.classList.add("background-edit-department")
+    toast.classList.add("toast-edit-department")
+    divForm.classList.add("div-input-edit-department")
+
+    const divTitle = document.createElement("div")
+    const title = document.createElement("h2")
+    const btCloseModal = document.createElement("span")
+    const btConfirmEdit = document.createElement("button")
+
+    divTitle.classList.add("div-title-edit-department")
+    title.classList.add("title-edit-department")
+    btCloseModal.classList.add("bt-cancel-edit-department")
+    btConfirmEdit.classList.add("bt-confirm-edit-department")
+
+    title.innerText = "Editar Departamento"
+    btCloseModal.innerText = "x"
+    btConfirmEdit.innerText = "Salvar alterações"
+
+    const form = document.createElement("form")
+    const inputDescription = document.createElement("input")
+
+/*     inputDescription.innerText = oldValues */
+    inputDescription.setAttribute("placeholder", `Insira uma nova descrição`)
+    inputDescription.setAttribute("value", oldValues)
+    inputDescription.setAttribute("required", "required")
+
+    divTitle.append(title, btCloseModal)
+    form.append(inputDescription, btConfirmEdit)
+    divForm.appendChild(form)
+
+    toast.append(divTitle, divForm)
+
+    background.appendChild(toast)
+    body.appendChild(background)
+
+
+    form.addEventListener("submit", (event) => {
         event.preventDefault()
-        
 
-        select.addEventListener("change", async (event) => {
-            
-            const selected = [...event.target.children]
-            selected.forEach(async (choice) => {
-                if(choice.id == "invalid"){
-                    console.log("selecione alguma empresa")
-                }else{
-                    let verifyDepartmentInChoose = await departmentsFromCompanySelected(choice.id)
-                    console.log(verifyDepartmentInChoose)
-                }
-            })
-
-            if(event.target.children[0]){
-                
-            }else{
-                let verifyDepartmentInChoose = await departmentsFromCompanySelected(event.target.children[0].id)
-                console.log(verifyDepartmentInChoose)
-            }
-        })
-    }) */
+        const body = {
+            description: inputDescription.value
+        }
+        editDescriptionDepartment(body, idDepartment)
+        /* chamar função para editar departamento */
+    })
 
 }
 
 
-
-export { toastResponse, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment, toastCreateDepartment }
+export { toastResponse, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment, toastCreateDepartment, toastEditDescriptionDepartment }
