@@ -9,7 +9,8 @@ const urlDepartments = 'http://localhost:6278/departments'
 const urlAllUsers = 'http://localhost:6278/users'
 const urlUpdateUser = 'http://localhost:6278/admin/update_user/'
 const urlDeleteUser = 'http://localhost:6278/admin/delete_user/'
-
+const urlAllUserNotWorking = 'http://localhost:6278/admin/out_of_work'
+const urlAdmitUser = 'http://localhost:6278/departments/hire/'
 
 export { urlAllCompanies, 
     urlSectors, 
@@ -21,5 +22,7 @@ export { urlAllCompanies,
     urlDepartments, 
     urlAllUsers, 
     urlUpdateUser, 
-    urlDeleteUser 
+    urlDeleteUser,
+    urlAllUserNotWorking,
+    urlAdmitUser
 }

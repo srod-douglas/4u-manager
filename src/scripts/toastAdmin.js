@@ -1,6 +1,19 @@
 import { getTokenLocal } from './localStorage.js'
 import { renderAllUsers } from './render/dashboardAdmin.js'
-import { createDepartment, dataUsers, deleteDataUser, deleteDepartment, departmentsFromCompanySelected, refreshDataUser, editDescriptionDepartment } from './request/dashboardAdmin.js'
+
+import { 
+    createDepartment, 
+    dataUsers, 
+    deleteDataUser, 
+    deleteDepartment, 
+    departmentsFromCompanySelected, 
+    refreshDataUser, 
+    editDescriptionDepartment,
+    usersNotWorking,
+    admitUser
+} from './request/dashboardAdmin.js'
+
+
 
 async function editUserFromAdmin (user) {
 
@@ -347,10 +360,107 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
             description: inputDescription.value
         }
         editDescriptionDepartment(body, idDepartment)
-        /* chamar função para editar departamento */
     })
 
 }
 
 
-export { toastResponse, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment, toastCreateDepartment, toastEditDescriptionDepartment }
+async function toastViewDepartment (department) {
+
+    const body = document.querySelector("body")
+    const background = document.createElement("div")
+    const toast = document.createElement("div")
+
+    background.classList.add("background-view-department")
+    toast.classList.add("toast-view-department")
+
+    const divTitle = document.createElement("div")
+    const title = document.createElement("h2")
+    const btCloseModal = document.createElement("span")
+    
+    divTitle.classList.add("div-title-view-department")
+    title.classList.add("title-view-department")
+    btCloseModal.classList.add("bt-close-view-department")
+    
+    title.innerText = department.name
+    btCloseModal.innerText = "x"
+    
+
+    const divContainerLeft = document.createElement("div")
+    const desc = document.createElement("p")
+    const company = document.createElement("span")
+
+    divContainerLeft.classList.add("div-view-container-left")
+    desc.classList.add("description-container-left")
+    company.classList.add("company-container-left")
+
+    desc.innerText = department.description
+    company.innerText = department.companies.name
+
+    const divContainerRight = document.createElement("div")
+    const select = document.createElement("select")
+    const optionInit = document.createElement("option")
+    const btContract = document.createElement("button")
+
+    divContainerRight.classList.add("div-view-container-right")
+    btContract.classList.add("bt-contract")
+    btContract.setAttribute("disabled", "disabled")
+    btContract.id = "choose"
+    btContract.innerText = "Contratar"
+
+    select.setAttribute("name", "users")
+    optionInit.setAttribute("value", "default")
+    optionInit.innerText = "Selecionar usuário"
+
+    select.appendChild(optionInit)
+
+    const dataUsersNotWorking = await usersNotWorking()
+
+    dataUsersNotWorking.forEach((user) => {
+
+        const option = document.createElement("option")
+        if(user.username !== "ADMIN"){
+
+            option.setAttribute("value", `${ user.username}`)
+            option.innerText = user.username
+            option.id =  user.uuid
+
+            select.appendChild(option)
+            
+        }else{}
+    })
+
+    divContainerRight.append(select, btContract)
+    body.appendChild(divContainerRight)
+
+    select.addEventListener("change", event =>{
+
+        const departmentId = department.uuid
+
+        if(select.selectedIndex != 0){
+
+            btContract.removeAttribute("disabled", "disabled")
+
+            const idUser = select.selectedOptions[0].id
+            console.log(idUser)
+            btContract.onclick = (event) => {
+                event.preventDefault()
+
+                const body = {
+                    user_uuid: idUser,
+                    department_uuid: departmentId
+                }
+
+                admitUser(body)
+            }
+ 
+        }else{
+            btContract.setAttribute("disabled", "disabled")
+        }
+
+    })
+}
+
+
+
+export { toastResponse, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment, toastCreateDepartment, toastEditDescriptionDepartment,toastViewDepartment }
