@@ -1,5 +1,6 @@
-import { dataCompanies, departmentsFromCompanySelected } from "../request/dashboardAdmin.js"
+import { allDepartments, dataCompanies, departmentsFromCompanySelected } from "../request/dashboardAdmin.js"
 import { getTokenLocal } from '../localStorage.js'
+
 
 async function renderAllDepartaments (response) {
     const data = await response
@@ -54,7 +55,7 @@ async function renderAllDepartaments (response) {
 
 async function renderAllUsers (data) {
     const users = await data
-
+ 
     const ul = document.querySelector("#registeredUsers")
     ul.innerHTML = ""
 
@@ -73,15 +74,20 @@ async function renderAllUsers (data) {
 
         name.innerText = user.username
         level.innerText = user.professional_level
-        company.innerText = user.department_uuid
 
         if(user.department_uuid == null){
             company.innerText = ""
         }else{
             const token = getTokenLocal()
-            const allCompanies = await dataCompanies(token.token)
-            allCompanies.forEach((companyUser) => {
-                company.innerText = companyUser.name
+
+            let departmentsTest = await allDepartments(token.token)
+
+            departmentsTest.forEach(async (companyUser) => {
+
+                if(user.department_uuid === companyUser.uuid)
+
+                company.innerText = await companyUser.companies.name
+  
             })
         }
 
