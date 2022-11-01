@@ -119,7 +119,7 @@ function toastResponse (type, alert, message) {
     body.appendChild(div)
     setTimeout(() => {
         window.location.reload()
-    }, 4000);
+    }, 400000);
 
 }
 
@@ -442,7 +442,9 @@ async function toastViewDepartment (department) {
             btContract.removeAttribute("disabled", "disabled")
 
             const idUser = select.selectedOptions[0].id
-            console.log(idUser)
+
+/*             console.log(idUser)
+            console.log(departmentId) */
             btContract.onclick = (event) => {
                 event.preventDefault()
 
@@ -450,7 +452,7 @@ async function toastViewDepartment (department) {
                     user_uuid: idUser,
                     department_uuid: departmentId
                 }
-
+                console.log(body)
                 admitUser(body)
             }
  

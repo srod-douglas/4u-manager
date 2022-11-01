@@ -1,4 +1,5 @@
 import { urlAdmitUser, urlAllCompanies, 
+    urlAllUserNotWorking, 
     urlAllUsers, 
     urlDeleteUser, 
     urlDepartments, 
@@ -216,7 +217,7 @@ async function editDescriptionDepartment (description, idDepartment){
 
 async function usersNotWorking () {
     const token = getTokenLocal()
-    const request = await fetch(urlAllUsers, {
+    const request = await fetch(urlAllUserNotWorking, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token.token}`
@@ -246,7 +247,7 @@ async function admitUser (body) {
         },
         body: JSON.stringify(body)
     })
-
+console.log(body)
     try{
         if(request.ok){
             const admited = await request.json()
@@ -264,12 +265,12 @@ async function admitUser (body) {
 
 
 export { 
+    allDepartments,
     dataCompanies, 
     dataUsers, 
     refreshDataUser, 
     deleteDataUser, 
     departmentsFromCompanySelected,
-    allDepartments,
     deleteDepartment,
     createDepartment,
     editDescriptionDepartment,

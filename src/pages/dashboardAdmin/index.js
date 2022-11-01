@@ -6,14 +6,11 @@ import {
     renderAllUsers 
 } from "../../scripts/render/dashboardAdmin.js";
 import { allDepartments, dataCompanies, 
-    dataUsers, deleteDepartment, departmentsFromCompanySelected
+    dataUsers
 } from "../../scripts/request/dashboardAdmin.js";
 
 
 const token = getTokenLocal()
-renderAllDepartaments(allDepartments(token.token))
-renderAllUsers(dataUsers(token.token))
-filterCompanies(dataCompanies(token.token))
 
 
 const logout = document.querySelector("#logout")
@@ -74,27 +71,30 @@ setTimeout(() => {
                 allDepts.forEach(async(department) => {
                     const idDepartment = await department.uuid
                     if(idDepartment == event.target.id){
-                       toastEditDescriptionDepartment(await department.description, idDepartment)
-                    }
-                })
-            }
-        })
-
-        const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
-        btsViewerDepartments.forEach((bt) => {
-            bt.onclick = async (event) => {
-
-                event.preventDefault()
-
-                const allDepts = await allDepartments(token.token)
-                allDepts.forEach(async(department) => {
-                    const idDepartment = await department.uuid
-                    if(idDepartment == event.target.id){
-                        console.log(department)
-                        toastViewDepartment(department)
+                        toastEditDescriptionDepartment(await department.description, idDepartment)
                     }
                 })
             }
         })
         
+        const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
+        btsViewerDepartments.forEach((bt) => {
+            bt.addEventListener("click",async (event) => {
+                
+                event.preventDefault()
+                
+                const allDepts = await allDepartments(token.token)
+                allDepts.forEach(async(department) => {
+                    const idDepartment = await department.uuid
+                    if(idDepartment == event.target.id){
+
+                        toastViewDepartment(department)
+                    }
+                })
+            }
+        )})
+        
 }, 100)
+renderAllDepartaments(allDepartments(token.token))
+renderAllUsers(dataUsers(token.token))
+    filterCompanies(dataCompanies(token.token))
