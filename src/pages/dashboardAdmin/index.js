@@ -21,8 +21,22 @@ logout.onclick = () => {
     window.location.replace(redirect)
 }
 
+
+
+
+
+
+
+
+
 setTimeout(() => {
     
+
+
+
+
+
+
     const btsEditUser = document.querySelectorAll(".bt-edit-user")
     btsEditUser.forEach((bt) => {
         bt.addEventListener("click", async () => {
@@ -78,27 +92,56 @@ setTimeout(() => {
         })
         
         const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
+
         btsViewerDepartments.forEach((bt) => {
+
             bt.addEventListener("click",async (event) => {
                 
                 event.preventDefault()
                 
                 const allDepts = await allDepartments(token.token)
+
                 allDepts.forEach(async(department) => {
+
                     const idDepartment = await department.uuid
+
                     if(idDepartment == event.target.id){
 
-                        const divContRight = document.querySelectorAll(".div-view-container-right")
-                        divContRight.forEach((div)=>{
+                        const backgroundModal = document.querySelectorAll(".background-view-department")
+
+                        backgroundModal.forEach((div)=>{
 
                             div.innerHTML=""
                         })
 
                         toastViewDepartment(department)
+
+                        const btCloseViewDept = document.querySelector(".bt-close-view-department")
+
+                        console.log(btCloseViewDept)
+                        if(btCloseViewDept !== null){
+
+                        btCloseViewDept.addEventListener("click", event => {
+                        backgroundModal.innerHTML = ""
+                            console.log(backgroundModal)
+                            .log('clicou')
+                        })
+                        }
                     }
                 })
+                const btCloseViewDept = document.querySelector(".bt-close-view-department")
+                const backgroundModal = document.querySelector(".background-view-department")
+                    if(btCloseViewDept !== null){
+        
+                        btCloseViewDept.addEventListener("click", event => {
+                            backgroundModal.innerHTML = ""
+                            console.log(backgroundModal)
+                            console.log('clicou')
+                        })
+                    }
             }
         )})
+
         
 }, 100)
 renderAllDepartaments(allDepartments(token.token))
