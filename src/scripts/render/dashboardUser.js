@@ -114,7 +114,7 @@ async function renderUserWorks (user) {
     const allCoWorkers = await getCoWorkersUser()
     
     allCoWorkers.forEach((coWorkers) => {
-        console.log(coWorkers.users)
+
         const same = coWorkers.users
         same.forEach((check) => {
             if(check.uuid !== user.uuid){
@@ -136,25 +136,22 @@ async function renderUserWorks (user) {
             }
         })
     })
-
-
-    
     
     const icon = document.createElement("img")
     icon.classList.add("icon-edit")
     icon.src = '../../assets/img/pen-to-square-solid.svg'
     icon.alt = 'Icone para editar'
     
-    
-    
-    
-    
     divName.append(name, icon)
     divInfosUser.append(email, level, kind)
     divInfosJob.append(companyName, departmentName)
     secCompanie.append(divInfosJob, ulCoWorkers)
     
-    
+    const token = getTokenLocal()
+    icon.addEventListener("click", () => {
+
+        toastEditProfileUser(getDataUser(token.token))
+    })
     
 }
 export { createUser, renderUserNotWorks }

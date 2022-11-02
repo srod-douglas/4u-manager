@@ -74,15 +74,18 @@ button{
     align-items: center;
     padding: 1rem;
     width: 300px;
-    height: 200px;
+    height: 100px;
     color: var(--color-white);
     background-color: var(--color-red);
     animation: toastAlerts 4s ease-in forwards;
     border-radius: 8px;
+    font-size: var(--font-size-2);
+    font-weight: 700;
 }
 
 .title-toast-response-red{
     color: var(--color-white);
+    margin-bottom: 1rem;
 }
 
 .desc-toast-response-red{
@@ -97,15 +100,18 @@ button{
     align-items: center;
     padding: 1rem;
     width: 300px;
-    height: 200px;
+    height: 100px;
     color: var(--color-white);
     background-color: var(--color-green);
     animation: toastAlerts 4s ease-in forwards;
     border-radius: 8px;
+    font-size: var(--font-size-2);
+    font-weight: 700;
 }
 
 .title-toast-response-green{
     color: var(--color-white);
+    margin-bottom: 1rem;
 }
 
 .desc-toast-response-green{
