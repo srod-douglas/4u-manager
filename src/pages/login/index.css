@@ -1,0 +1,35 @@
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+main{
+    height: 80vh;
+    margin: 0rem 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header{
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 0 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    box-shadow: 0px 2px rgba(0, 0, 0, .1);
+}
+header > div{
+    display: flex;
+}
+
+header > div > img {
+    margin-right: 1rem;
+}
+
+.div-bts-redirect{
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+}
