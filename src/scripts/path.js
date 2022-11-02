@@ -12,6 +12,12 @@ const urlDeleteUser = 'http://localhost:6278/admin/delete_user/'
 const urlAllUserNotWorking = 'http://localhost:6278/admin/out_of_work'
 const urlAdmitUser = 'http://localhost:6278/departments/hire/'
 
+
+
+const departmentsOfCompanyUser = 'http://localhost:6278/users/departments'
+const urlCoWorkers = 'http://localhost:6278/users/departments/coworkers'
+
+
 export { urlAllCompanies, 
     urlSectors, 
     urlCreateNewUser, 
@@ -24,5 +30,7 @@ export { urlAllCompanies,
     urlUpdateUser, 
     urlDeleteUser,
     urlAllUserNotWorking,
-    urlAdmitUser
+    urlAdmitUser,
+    departmentsOfCompanyUser,
+    urlCoWorkers
 }
