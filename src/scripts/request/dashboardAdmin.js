@@ -261,7 +261,7 @@ async function admitUser (body) {
         },
         body: JSON.stringify(body)
     })
-console.log(body)
+
     try{
         if(request.ok){
             const admited = await request.json()
@@ -288,10 +288,10 @@ async function turnOffUserOfDepartment (idUser) {
     try{
         if(request.ok){
             toastResponse("success", "Solicitação efetuada com sucesso!", "O funcionário foi desligado.")
-            console.log(request)
+
         }else{
             toastResponse("error", "Algo deu errado.", "Por favor, atualize a págine e tente novamente.")
-            console.log(request)
+
         }
     }catch(err){
         console.log(err)

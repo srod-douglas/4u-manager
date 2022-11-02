@@ -1,6 +1,8 @@
 import { getTokenLocal } from './localStorage.js'
-import { renderAllUsers, renderFilteredDepartment, filterCompanies } from './render/dashboardAdmin.js'
+import { renderAllUsers, renderFilteredDepartment, filterCompanies, renderAllDepartaments } from './render/dashboardAdmin.js'
 import { dataCompanies } from './request/dashboardAdmin.js'
+import { allDepartments } from './request/dashboardAdmin.js'
+
 
 import { 
     createDepartment, 
@@ -255,15 +257,15 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
     btDeleteDepartment.onclick = async () => {
         await deleteDepartment(idDepartment)
         
+        const token = getTokenLocal()
+        renderAllDepartaments(allDepartments(token.token))
 
         setTimeout(() => {
             background.classList.remove("appear")
             background.classList.add("desappear")
-        }, 3980);
+        }, 1980);
         
         setTimeout(() => {
-            const token = getTokenLocal()
-            renderAllDepartaments(allDepartments(token.token))
             background.removeAttribute("class")
             background.innerHTML = ""
         }, 2980);
@@ -279,7 +281,7 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
             background.removeAttribute("class")
             background.innerHTML = ""
     
-        }, 3980)
+        }, 980)
         })
 }
 
@@ -394,7 +396,7 @@ async function toastCreateDepartment (allCompanies) {
                         const token = getTokenLocal()
                         background.removeAttribute("class")
                         background.innerHTML = ""
-                        filterCompanies(dataCompanies(token.token))
+                        renderAllDepartaments(allDepartments(token.token))
                     }, 3980);
 
                 }
@@ -499,7 +501,7 @@ function toastEditDescriptionDepartment (oldValues, idDepartment, data) {
 async function toastViewDepartment (department) {
 
     const divContRight = document.querySelectorAll(".toast-background")
-    console.log(divContRight)
+
     divContRight.forEach((div)=>{
         div.removeAttribute("class")
         div.innerHTML=""
@@ -585,7 +587,7 @@ async function toastViewDepartment (department) {
     if(usersThisDept.length > 0){
 
         usersThisDept.forEach((user)=>{
-            console.log(user)
+
             const li = document.createElement("li")
     
             const divInfos = document.createElement("div")
@@ -644,7 +646,7 @@ async function toastViewDepartment (department) {
                     user_uuid: idUser,
                     department_uuid: departmentId
                 }
-                console.log(body)
+
                 admitUser(body)
                 setTimeout(() =>{
 
