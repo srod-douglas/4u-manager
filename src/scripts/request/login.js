@@ -17,6 +17,9 @@ async function checkLogin (body) {
             const user = await request.json()
             setUserLocal(user)
             validateUser(user)
+            toastOk("success", "Login efetuado com sucesso!", "Estamos redirecionando para a sua Home Page.")
+        }else{
+            toastOk("error", "Algo deu errado.", "Por favor, confira o seu email e senha. Tente novamente.")
         }
 
     }catch(err){
@@ -39,9 +42,17 @@ async function validateUser (token) {
             if(admin.is_admin){
                 setTokenLocal(admin)
                 toastOk("success", "Login Efetuado", "Redicionaremos para a sua Página Inicial.")
-                window.location.replace("../../pages/dashboardAdmin/index.html")
+
+                setTimeout(() => {
+                    window.location.replace("../../pages/dashboardAdmin/index.html")
+                }, 4000);
+
             }else{
-                window.location.replace("../../pages/dashboardUser/index.html")
+                toastOk("success", "Login Efetuado", "Redicionaremos para a sua Página Inicial.")
+                setTimeout(() => {
+                    window.location.replace("../../pages/dashboardUser/index.html")
+                }, 4000);
+
             }
         }else{
             console.log(admin)

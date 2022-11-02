@@ -51,6 +51,7 @@ header > div > img {
     width: 1180px;
     height: 7.5rem;
     border: 1px solid rgba(0, 0, 0, .1);
+    margin-bottom: 55px;
 }
 
 .div_userName{
@@ -110,7 +111,10 @@ ul{
     height: 467px;
     display: flex;
     flex-wrap: wrap;
+    justify-content:center; 
+    align-items: flex-start;
     overflow-y: auto;
+    gap: 1.5rem;
 }
 
 .card-coWorker{
