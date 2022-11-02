@@ -1,12 +1,17 @@
-import { urlAdmitUser, urlAllCompanies, 
+import { 
+    urlAdmitUser, urlAllCompanies, 
     urlAllUserNotWorking, 
     urlAllUsers, 
     urlDeleteUser, 
     urlDepartments, 
+    urlTurnOff, 
     urlUpdateUser 
 } from "../path.js";
+
 import { toastResponse } from "../toastAdmin.js";
 import { getTokenLocal } from '../localStorage.js'
+import { renderFilteredDepartment } from "../render/dashboardAdmin.js";
+
 
 async function dataCompanies (token) {
     const request = await fetch(urlAllCompanies,{
@@ -29,6 +34,7 @@ async function dataCompanies (token) {
     }
 }
 
+
 async function dataUsers (token) {
     const request = await fetch(urlAllUsers,{
         method: "GET",
@@ -49,6 +55,7 @@ async function dataUsers (token) {
     }
 }
 
+
 async function refreshDataUser (idUser, body, tokenAdmin) {
     const request = await fetch(`${urlUpdateUser}${idUser}`,{
         method: "PATCH",
@@ -62,6 +69,7 @@ async function refreshDataUser (idUser, body, tokenAdmin) {
     try{
         if(request.ok){
             const data = await request.json()
+
             toastResponse("success", "Solicitação efetuada", "Usuário editado com sucesso.")
             return data
         }else{
@@ -95,6 +103,7 @@ async function deleteDataUser (idUser) {
     }
 }
 
+
 async function allDepartments (tokenAdmin) {
     const request = await fetch(urlDepartments, {
         method: "GET",
@@ -118,6 +127,7 @@ async function allDepartments (tokenAdmin) {
     }
 }
 
+
 async function departmentsFromCompanySelected (idCompany) {
     const token = getTokenLocal()
     const request = await fetch(`${urlDepartments}/${idCompany}`, {
@@ -131,7 +141,7 @@ async function departmentsFromCompanySelected (idCompany) {
 
         if(request.ok){
             const departments = await request.json()
-            console.log(departments)
+
             return departments
         }else{
             console.log(request)
@@ -155,9 +165,9 @@ async function deleteDepartment (idDepartment) {
     try{
 
         if(request.ok){
-            console.log(request)
+            toastResponse("success", "Solicitação efetuada com sucesso!", "O departamento foi deletado.")
         }else{
-            console.log(request)
+            toastResponse("error", "Algo deu errado.", "Por favor, atualize a págine e tente novamente.")
         }
 
     }catch(err){
@@ -181,8 +191,10 @@ async function createDepartment (body) {
     try{
         if(request.ok){
             const success = await request.json()
+            toastResponse("success", "Solicitação bem sucedida!", "Departamento criado com sucesso.")
             return success
         }else{
+            toastResponse("Error", "Algo saiu errado.", "Por favor, tente novamente mais tarde.")
             console.log(request)
         }
     }catch(err){
@@ -204,7 +216,9 @@ async function editDescriptionDepartment (description, idDepartment){
 
     try{
         if(request.ok){
-            toastResponse("Success", "Solicitação bem sucedida!", "Descrição atualizada com sucesso.")
+            toastResponse("success", "Solicitação bem sucedida!", "Descrição atualizada com sucesso.")
+            const data = await request.json()
+            return data
         }else{
             toastResponse("Error", "Algo saiu errado.", "Por favor, tente novamente mais tarde.")
             console.log(request)
@@ -263,6 +277,27 @@ console.log(body)
 }
 
 
+async function turnOffUserOfDepartment (idUser) {
+    const token = getTokenLocal()
+    const request = await fetch(`${urlTurnOff}${idUser}`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${token.token}`
+        }
+    })
+    try{
+        if(request.ok){
+            toastResponse("success", "Solicitação efetuada com sucesso!", "O funcionário foi desligado.")
+            console.log(request)
+        }else{
+            toastResponse("error", "Algo deu errado.", "Por favor, atualize a págine e tente novamente.")
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 async function dataUsersFromDepartment (department) {
     const token = getTokenLocal()
@@ -292,5 +327,6 @@ export {
     editDescriptionDepartment,
     usersNotWorking,
     admitUser,
-    dataUsersFromDepartment
+    dataUsersFromDepartment,
+    turnOffUserOfDepartment
 }

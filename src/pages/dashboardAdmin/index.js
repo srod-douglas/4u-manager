@@ -37,21 +37,24 @@ setTimeout(() => {
 
 
 
-    const btsEditUser = document.querySelectorAll(".bt-edit-user")
-    btsEditUser.forEach((bt) => {
+    /* const btsEditUser = document.querySelectorAll(".bt-edit-user") */
+    /* btsEditUser.forEach((bt) => {
         bt.addEventListener("click", async () => {
             const idUser = bt.id
-            console.log(idUser)
+
             const allUsers = await dataUsers(token.token)
+
             allUsers.forEach( async (user) => {
+
                 if(idUser == user.uuid){
+
                     editUserFromAdmin(user)
                 }
             })
         })
-    })
+    }) */
 
-    const btsDeleteUser = document.querySelectorAll(".bt-del-user")
+/*     const btsDeleteUser = document.querySelectorAll(".bt-del-user")
     btsDeleteUser.forEach((bt) => {
         bt.addEventListener("click", async () => {
             const idUser = bt.id
@@ -62,22 +65,22 @@ setTimeout(() => {
                 }
             })
             })
-        })
+        }) */
 
-        const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
+/*         const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
         btsDeleteDepartment.forEach((bt)=>{
             bt.addEventListener("click", event => {
                 console.log(event.target)
                 toastDeleteDepartment(bt.id, bt.dataset.path)
                 
             })
-        })
+        }) */
 
         const btCreateDepartment = document.querySelector("#new-department")
         btCreateDepartment.onclick = async () => {
             await toastCreateDepartment(dataCompanies(token.token))
         }
-        const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
+        /* const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
         btsEditDepartments.forEach((bt)=>{
             bt.onclick = async (event) => {
                 event.preventDefault()
@@ -89,7 +92,7 @@ setTimeout(() => {
                     }
                 })
             }
-        })
+        }) */
         
         const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
 
@@ -112,33 +115,33 @@ setTimeout(() => {
                         backgroundModal.forEach((div)=>{
 
                             div.innerHTML=""
+                            backgroundModal.removeAttribute("class")
                         })
 
                         toastViewDepartment(department)
 
-                        const btCloseViewDept = document.querySelector(".bt-close-view-department")
+                        /* const btCloseViewDept = document.querySelector(".bt-close-view-department")
 
                         console.log(btCloseViewDept)
                         if(btCloseViewDept !== null){
 
                         btCloseViewDept.addEventListener("click", event => {
                         backgroundModal.innerHTML = ""
-                            console.log(backgroundModal)
-                            .log('clicou')
+                            
+                            
                         })
-                        }
+                        } */
                     }
                 })
-                const btCloseViewDept = document.querySelector(".bt-close-view-department")
+/*                 const btCloseViewDept = document.querySelector(".bt-close-view-department")
                 const backgroundModal = document.querySelector(".background-view-department")
                     if(btCloseViewDept !== null){
         
                         btCloseViewDept.addEventListener("click", event => {
                             backgroundModal.innerHTML = ""
-                            console.log(backgroundModal)
-                            console.log('clicou')
+                            
                         })
-                    }
+                    } */
             }
         )})
 
