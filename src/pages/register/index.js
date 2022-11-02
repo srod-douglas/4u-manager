@@ -11,7 +11,7 @@ bts.forEach((bt)=>{
         if(bt.id == "btLogin"){
             window.location.replace(`${bt.dataset.path}`)
         }if(bt.id == "btRegister"){
-            window.location.reload()
+            window.location.replace(`${bt.dataset.path}`)
         }
     }
 })
@@ -34,9 +34,3 @@ form.addEventListener("submit", (event) => {
     registerNewUser(body)
 
 })
-
-/* const select = document.querySelector("select")
-
-select.addEventListener("change", () =>{
-    console.log(select.value)
-}) */

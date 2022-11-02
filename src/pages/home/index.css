@@ -1,6 +1,7 @@
 body{
     height: 100vh;
     width: 100vw;
+    animation: entryPages 1s ease-in;
 }
 
 main{
@@ -28,7 +29,7 @@ header > div > img {
     margin-right: 1rem;
 }
 
-.div-bts-redirect{
+.div-bts-redirect-home{
     width: 320px;
     display: flex;
     justify-content: space-between;
@@ -96,4 +97,13 @@ header > div > img {
     font-size: var(--font-size-1);
     font-weight: 400;
     color: var(--color-blue);
+}
+
+@keyframes entryPages {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
