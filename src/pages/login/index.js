@@ -22,3 +22,34 @@ form.addEventListener("submit", (event) => {
     }
     checkLogin(body)
 })
+
+function toastOk (type, alert, message) {
+    const body = document.querySelector("body")
+
+    const div = document.createElement("div")
+    const title = document.createElement("p")
+    const desc = document.createElement("span")
+
+    div.classList.add("div-toast-alert")
+    div.classList.add("toast-alert")
+    title.classList.add("title-toast-alert")
+    desc.classList.add("desc-toast-alert")
+
+    if(type == "success"){
+        title.innerText = alert
+        desc.innerText = message
+        
+    }else{
+        title.innerText = alert
+        desc.innerText = message
+    }
+    
+    div.append(title, desc)
+    body.appendChild(div)
+    setTimeout(() => {
+        window.location.reload()
+    }, 4000);
+
+}
+
+export { toastOk }

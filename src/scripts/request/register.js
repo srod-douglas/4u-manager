@@ -13,6 +13,7 @@ async function registerNewUser (body) {
 
         if(request.ok){
             const data = await request.json()
+            console.log(request)
             /* call modal */
             window.location.assign("../../pages/login/index.html")
         }else{
