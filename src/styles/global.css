@@ -67,7 +67,7 @@ button{
 } */
 
 .div-toast-response-red{
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -37,8 +37,8 @@ setTimeout(() => {
 
 
 
-    const btsEditUser = document.querySelectorAll(".bt-edit-user")
-    btsEditUser.forEach((bt) => {
+    /* const btsEditUser = document.querySelectorAll(".bt-edit-user") */
+    /* btsEditUser.forEach((bt) => {
         bt.addEventListener("click", async () => {
             const idUser = bt.id
 
@@ -47,14 +47,14 @@ setTimeout(() => {
             allUsers.forEach( async (user) => {
 
                 if(idUser == user.uuid){
-                    
+
                     editUserFromAdmin(user)
                 }
             })
         })
-    })
+    }) */
 
-    const btsDeleteUser = document.querySelectorAll(".bt-del-user")
+/*     const btsDeleteUser = document.querySelectorAll(".bt-del-user")
     btsDeleteUser.forEach((bt) => {
         bt.addEventListener("click", async () => {
             const idUser = bt.id
@@ -65,16 +65,16 @@ setTimeout(() => {
                 }
             })
             })
-        })
+        }) */
 
-        const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
+/*         const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
         btsDeleteDepartment.forEach((bt)=>{
             bt.addEventListener("click", event => {
                 console.log(event.target)
                 toastDeleteDepartment(bt.id, bt.dataset.path)
                 
             })
-        })
+        }) */
 
         const btCreateDepartment = document.querySelector("#new-department")
         btCreateDepartment.onclick = async () => {
@@ -115,11 +115,12 @@ setTimeout(() => {
                         backgroundModal.forEach((div)=>{
 
                             div.innerHTML=""
+                            backgroundModal.removeAttribute("class")
                         })
 
                         toastViewDepartment(department)
 
-                        const btCloseViewDept = document.querySelector(".bt-close-view-department")
+                        /* const btCloseViewDept = document.querySelector(".bt-close-view-department")
 
                         console.log(btCloseViewDept)
                         if(btCloseViewDept !== null){
@@ -129,10 +130,10 @@ setTimeout(() => {
                             
                             
                         })
-                        }
+                        } */
                     }
                 })
-                const btCloseViewDept = document.querySelector(".bt-close-view-department")
+/*                 const btCloseViewDept = document.querySelector(".bt-close-view-department")
                 const backgroundModal = document.querySelector(".background-view-department")
                     if(btCloseViewDept !== null){
         
@@ -140,7 +141,7 @@ setTimeout(() => {
                             backgroundModal.innerHTML = ""
                             
                         })
-                    }
+                    } */
             }
         )})
 

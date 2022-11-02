@@ -1,6 +1,6 @@
-import { allDepartments, dataCompanies, departmentsFromCompanySelected } from "../request/dashboardAdmin.js"
+import { allDepartments, dataCompanies, departmentsFromCompanySelected, dataUsers } from "../request/dashboardAdmin.js"
 import { getTokenLocal } from '../localStorage.js'
-import { toastViewDepartment, toastEditDescriptionDepartment } from '../toastAdmin.js'
+import { toastViewDepartment, toastEditDescriptionDepartment, editUserFromAdmin, toastDeleteUser } from '../toastAdmin.js'
 
 
 async function renderAllDepartaments (response) {
@@ -88,7 +88,7 @@ async function renderAllDepartaments (response) {
 
 async function renderAllUsers (data) {
     const users = await data
- 
+    console.log(users)
     const ul = document.querySelector("#registeredUsers")
     ul.innerHTML = ""
 
@@ -140,11 +140,42 @@ async function renderAllUsers (data) {
             divInfos.append(name, level, company)
             card.append(divInfos, divBts)
             ul.appendChild(card)
+            console.log(card)
         }else{
            
         }
 
     })
+    const btsEdit = document.querySelectorAll(".bt-edit-user")
+    const token = getTokenLocal()
+    btsEdit.forEach((bt) => {
+        bt.addEventListener("click", async () => {
+            const idUser = bt.id
+            const allUsers = await dataUsers(token.token)
+            
+            allUsers.forEach( async (user) => {
+                console.log(idUser, user.uuid)
+
+                if(idUser == user.uuid){
+                    
+                    editUserFromAdmin(user)
+                }
+            })
+        })
+    })
+
+    const btsDeleteUser = document.querySelectorAll(".bt-del-user")
+    btsDeleteUser.forEach((bt) => {
+        bt.addEventListener("click", async () => {
+            const idUser = bt.id
+            const allUsers = await dataUsers(token.token)
+            allUsers.forEach( async (user) => {
+                if(idUser == user.uuid){
+                    toastDeleteUser(user)
+                }
+            })
+            })
+        })
 
 }
 
@@ -164,7 +195,7 @@ async function filterCompanies (dataCompanies) {
     
     select.addEventListener("change", async event => {
         const idDepartment = event.target.value
-        console.log(idDepartment)
+
         const data = await departmentsFromCompanySelected(idDepartment)
         const token = getTokenLocal()
         if(data.length == 0){
@@ -183,7 +214,7 @@ async function renderFilteredDepartment (response) {
     ul.innerHTML = ""
 
     data.forEach((companie) => {
-        
+
         const card = document.createElement("li")
         const divInfos = document.createElement("div")
         const divBts = document.createElement("div")
@@ -225,16 +256,23 @@ async function renderFilteredDepartment (response) {
         ul.appendChild(card)
 
     })
+
     const token = getTokenLocal()
+
     const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
+
     btsViewerDepartments.forEach((bt) => {
+
         bt.addEventListener("click",async (event) => {
             
             event.preventDefault()
             
             const allDepts = await allDepartments(token.token)
+
             allDepts.forEach(async(department) => {
+
                 const idDepartment = await department.uuid
+
                 if(idDepartment == event.target.id){
 
                     toastViewDepartment(department)
@@ -242,6 +280,26 @@ async function renderFilteredDepartment (response) {
             })
         }
     )})
+
+    const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
+
+    btsEditDepartments.forEach((bt)=>{
+
+        bt.onclick = async (event) => {
+            event.preventDefault()
+            const allDepts = await allDepartments(token.token)
+
+            allDepts.forEach(async(department) => {
+                const idDepartment = await department.uuid
+
+                if(idDepartment == event.target.id){
+
+                    toastEditDescriptionDepartment(await department.description, idDepartment, data)
+
+                }
+            })
+        }
+    })
 }
 
 

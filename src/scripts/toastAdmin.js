@@ -1,5 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
-import { renderAllUsers } from './render/dashboardAdmin.js'
+import { renderAllUsers, renderFilteredDepartment, filterCompanies } from './render/dashboardAdmin.js'
+import { dataCompanies } from './request/dashboardAdmin.js'
 
 import { 
     createDepartment, 
@@ -11,7 +12,8 @@ import {
     editDescriptionDepartment,
     usersNotWorking,
     admitUser,
-    dataUsersFromDepartment
+    dataUsersFromDepartment,
+    turnOffUserOfDepartment
 } from './request/dashboardAdmin.js'
 
 
@@ -129,7 +131,7 @@ async function editUserFromAdmin (user) {
 }
 
 function toastResponse (type, alert, message) {
-    const body = document.querySelector("body")
+    const body = document.querySelector(".toast-background")
 
     const div = document.createElement("div")
     const title = document.createElement("p")
@@ -153,9 +155,7 @@ function toastResponse (type, alert, message) {
     
     div.append(title, desc)
     body.appendChild(div)
-    setTimeout(() => {
-        window.location.reload()
-    }, 4000);
+
 
 }
 
@@ -165,18 +165,18 @@ function toastDeleteUser (user) {
     const background = document.createElement("div")
     const toast = document.createElement("div")
 
-    background.classList.add("background-delete-user")
-    toast.classList.add("toast-delete-user")
+    background.classList.add("toast-background", "appear")
+    toast.classList.add("toast-delete-department")
 
     const divTitle = document.createElement("div")
     const title = document.createElement("h2")
     const btCloseModal = document.createElement("span")
     const btDeleteUser = document.createElement("button")
 
-    divTitle.classList.add("div-title-delete-user")
-    title.classList.add("title-delete-user")
-    btCloseModal.classList.add("bt-cancel-delete-user")
-    btDeleteUser.classList.add("bt-confirm-delete-user")
+    divTitle.classList.add("div-title-delete-department")
+    title.classList.add("title-delete-department")
+    btCloseModal.classList.add("bt-cancel-delete-department")
+    btDeleteUser.classList.add("bt-confirm-delete-department")
 
     title.innerText = `Realmente deseja remover o usuário ${user.username}?`
     btCloseModal.innerText = "x"
@@ -192,11 +192,32 @@ function toastDeleteUser (user) {
 
     btDeleteUser.onclick = () => {
         deleteDataUser(user.uuid)
-        background.innerHTML = ""
+        const token = getTokenLocal()
+        
+        background.classList.remove("appear")
         setTimeout(() => {
-            window.location.reload()
-        }, 4000);
+            background.classList.add("desappear")
+            renderAllUsers(dataUsers(token.token))
+        }, 3980);
+        
+        setTimeout(() => {
+            background.removeAttribute("class")
+            background.innerHTML = ""
+        }, 2980);
+
     }
+    btCloseModal.addEventListener("click", event => {
+
+        background.classList.remove("appear")
+        background.classList.add("desappear")
+        
+        setTimeout(() => {
+    
+            background.removeAttribute("class")
+            background.innerHTML = ""
+    
+        }, 980)
+        })
 }
 
 
@@ -206,7 +227,7 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
     const background = document.createElement("div")
     const toast = document.createElement("div")
 
-    background.classList.add("background-delete-department", "appear")
+    background.classList.add("toast-background", "appear")
     toast.classList.add("toast-delete-department")
 
     const divTitle = document.createElement("div")
@@ -245,7 +266,7 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
             renderAllDepartaments(allDepartments(token.token))
             background.removeAttribute("class")
             background.innerHTML = ""
-        }, 6980);
+        }, 2980);
     }
 
     btCloseModal.addEventListener("click", event => {
@@ -258,7 +279,7 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
             background.removeAttribute("class")
             background.innerHTML = ""
     
-        }, 980)
+        }, 3980)
         })
 }
 
@@ -273,7 +294,7 @@ async function toastCreateDepartment (allCompanies) {
     const toast = document.createElement("div")
     const divForm = document.createElement("div")
 
-    background.classList.add("background-new-department", "appear")
+    background.classList.add("toast-background", "appear")
     toast.classList.add("toast-new-department")
     divForm.classList.add("div-inputs-new-department")
 
@@ -370,8 +391,10 @@ async function toastCreateDepartment (allCompanies) {
                     }, 2980);
                     
                     setTimeout(() => {
+                        const token = getTokenLocal()
                         background.removeAttribute("class")
                         background.innerHTML = ""
+                        filterCompanies(dataCompanies(token.token))
                     }, 3980);
 
                 }
@@ -393,14 +416,14 @@ async function toastCreateDepartment (allCompanies) {
 }
 
 
-function toastEditDescriptionDepartment (oldValues, idDepartment) {
+function toastEditDescriptionDepartment (oldValues, idDepartment, data) {
 
     const body = document.querySelector("body")
     const background = document.createElement("div")
     const toast = document.createElement("div")
     const divForm = document.createElement("div")
 
-    background.classList.add("background-edit-department", "appear")
+    background.classList.add("toast-background", "appear")
     toast.classList.add("toast-edit-department")
     divForm.classList.add("div-input-edit-department")
 
@@ -435,13 +458,14 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
     body.appendChild(background)
 
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault()
 
         const body = {
             description: inputDescription.value
         }
         editDescriptionDepartment(body, idDepartment)
+
 
         background.classList.remove("appear")
         setTimeout(() => {
@@ -451,6 +475,7 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
         setTimeout(() => {
             background.removeAttribute("class")
             background.innerHTML = ""
+            window.location.reload()
         }, 3980);
     })
 
@@ -473,9 +498,10 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
 
 async function toastViewDepartment (department) {
 
-    const divContRight = document.querySelectorAll(".background-view-department")
+    const divContRight = document.querySelectorAll(".toast-background")
+    console.log(divContRight)
     divContRight.forEach((div)=>{
-
+        div.removeAttribute("class")
         div.innerHTML=""
     })
 
@@ -484,7 +510,7 @@ async function toastViewDepartment (department) {
     const toast = document.createElement("div")
     const secContainers = document.createElement("section")
 
-    background.classList.add("background-view-department", "appear")
+    background.classList.add("toast-background", "appear")
     toast.classList.add("toast-view-department")
     secContainers.classList.add("sec-containers-modal")
 
@@ -559,7 +585,7 @@ async function toastViewDepartment (department) {
     if(usersThisDept.length > 0){
 
         usersThisDept.forEach((user)=>{
-
+            console.log(user)
             const li = document.createElement("li")
     
             const divInfos = document.createElement("div")
@@ -580,7 +606,7 @@ async function toastViewDepartment (department) {
     
             const btTurnOff = document.createElement("button")
             btTurnOff.classList.add("bt-turn-off-user")
-            btTurnOff.id = "btTurnOff"
+            btTurnOff.id = user.uuid
             btTurnOff.innerText = "Desligar"
     
             divInfos.append(userName, level, companyName)
@@ -620,6 +646,10 @@ async function toastViewDepartment (department) {
                 }
                 console.log(body)
                 admitUser(body)
+                setTimeout(() =>{
+
+                    toastViewDepartment(department)
+                },2000)
             }
  
         }else{
@@ -636,14 +666,28 @@ async function toastViewDepartment (department) {
         
         setTimeout(() => {
     
-            background.removeAttribute("class")
             background.innerHTML = ""
+            background.removeAttribute("class")
     
         }, 980)
         })
         /* btCloseModal.addEventListener("click", () => { */
 
+    const btTurnOff = document.querySelectorAll(".bt-turn-off-user")
+    btTurnOff.forEach((bt) => {
+        
+        bt.onclick = (event) =>{
+            event.preventDefault()
+            const idUserToTurnOff = bt.id
+            turnOffUserOfDepartment(idUserToTurnOff)
+
+            setTimeout(() =>{
     
+                toastViewDepartment(department)
+            },2000)
+
+        }
+    })
 
         
 }

@@ -276,9 +276,10 @@ select:hover{
 }
 
 .div-input-edit-department > form > input {
-    height: 113px;
+    padding: 1rem 0 4rem 1rem;
     margin-bottom: .8rem;
     text-overflow: ellipsis;
+    resize: none;
 }
 
 .bt-confirm-edit-department{

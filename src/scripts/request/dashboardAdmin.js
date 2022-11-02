@@ -4,11 +4,13 @@ import {
     urlAllUsers, 
     urlDeleteUser, 
     urlDepartments, 
+    urlTurnOff, 
     urlUpdateUser 
 } from "../path.js";
 
 import { toastResponse } from "../toastAdmin.js";
 import { getTokenLocal } from '../localStorage.js'
+import { renderFilteredDepartment } from "../render/dashboardAdmin.js";
 
 
 async function dataCompanies (token) {
@@ -67,6 +69,7 @@ async function refreshDataUser (idUser, body, tokenAdmin) {
     try{
         if(request.ok){
             const data = await request.json()
+
             toastResponse("success", "Solicitação efetuada", "Usuário editado com sucesso.")
             return data
         }else{
@@ -214,6 +217,8 @@ async function editDescriptionDepartment (description, idDepartment){
     try{
         if(request.ok){
             toastResponse("success", "Solicitação bem sucedida!", "Descrição atualizada com sucesso.")
+            const data = await request.json()
+            return data
         }else{
             toastResponse("Error", "Algo saiu errado.", "Por favor, tente novamente mais tarde.")
             console.log(request)
@@ -272,6 +277,28 @@ console.log(body)
 }
 
 
+async function turnOffUserOfDepartment (idUser) {
+    const token = getTokenLocal()
+    const request = await fetch(`${urlTurnOff}${idUser}`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${token.token}`
+        }
+    })
+    try{
+        if(request.ok){
+            toastResponse("success", "Solicitação efetuada com sucesso!", "O funcionário foi desligado.")
+            console.log(request)
+        }else{
+            toastResponse("error", "Algo deu errado.", "Por favor, atualize a págine e tente novamente.")
+            console.log(request)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
 async function dataUsersFromDepartment (department) {
     const token = getTokenLocal()
     const allLoggedUsers = await dataUsers(token.token)
@@ -300,5 +327,6 @@ export {
     editDescriptionDepartment,
     usersNotWorking,
     admitUser,
-    dataUsersFromDepartment
+    dataUsersFromDepartment,
+    turnOffUserOfDepartment
 }
