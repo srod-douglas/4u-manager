@@ -21,7 +21,7 @@ async function editUserFromAdmin (user) {
         const body = document.querySelector("body")
     
         const background = document.createElement("div")
-        background.classList.add("toast-background")
+        background.classList.add("toast-background", "appear")
         const toast = document.createElement("div")
         toast.classList.add("toast-body")
     
@@ -96,13 +96,36 @@ async function editUserFromAdmin (user) {
             const tokenAdmin = getTokenLocal()
             await refreshDataUser(idUser, body, tokenAdmin.token)
             await renderAllUsers(dataUsers(tokenAdmin.token))
-            background.innerHTML = ""
+
+            background.classList.remove("appear")
+            setTimeout(() => {
+                background.classList.add("desappear")
+            }, 2980);
+            
+            setTimeout(() => {
+                background.removeAttribute("class")
+                background.innerHTML = ""
+            }, 3980);
+/*             background.innerHTML = "" */
         })
 
-        btCloseModal.addEventListener("click", () =>{
+/*         btCloseModal.addEventListener("click", () =>{
             background.innerHTML = ""
             background.classList.remove("toast-background")
-        })
+        }) */
+
+        btCloseModal.addEventListener("click", event => {
+
+            background.classList.remove("appear")
+            background.classList.add("desappear")
+            
+            setTimeout(() => {
+        
+                background.removeAttribute("class")
+                background.innerHTML = ""
+        
+            }, 980)
+            })
 }
 
 function toastResponse (type, alert, message) {
@@ -112,11 +135,18 @@ function toastResponse (type, alert, message) {
     const title = document.createElement("p")
     const desc = document.createElement("span")
 
+    
     if(type == "success"){
+        div.classList.add("div-toast-response-green")
+        title.classList.add("title-toast-response-green")
+        desc.classList.add("desc-toast-response-green")
         title.innerText = alert
         desc.innerText = message
         
     }else{
+        div.classList.add("div-toast-response-red")
+        title.classList.add("title-toast-response-red")
+        desc.classList.add("desc-toast-response-red")
         title.innerText = alert
         desc.innerText = message
     }
@@ -171,11 +201,12 @@ function toastDeleteUser (user) {
 
 
 function toastDeleteDepartment (idDepartment, nameDepartment) {
+
     const body = document.querySelector("body")
     const background = document.createElement("div")
     const toast = document.createElement("div")
 
-    background.classList.add("background-delete-department")
+    background.classList.add("background-delete-department", "appear")
     toast.classList.add("toast-delete-department")
 
     const divTitle = document.createElement("div")
@@ -200,17 +231,40 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
 
     body.appendChild(background)
 
-    btDeleteDepartment.onclick = () => {
-        deleteDepartment(idDepartment)
-        background.innerHTML = ""
+    btDeleteDepartment.onclick = async () => {
+        await deleteDepartment(idDepartment)
+        
+
         setTimeout(() => {
-            window.location.reload()
-        }, 4000);
+            background.classList.remove("appear")
+            background.classList.add("desappear")
+        }, 3980);
+        
+        setTimeout(() => {
+            const token = getTokenLocal()
+            renderAllDepartaments(allDepartments(token.token))
+            background.removeAttribute("class")
+            background.innerHTML = ""
+        }, 6980);
     }
+
+    btCloseModal.addEventListener("click", event => {
+
+        background.classList.remove("appear")
+        background.classList.add("desappear")
+        
+        setTimeout(() => {
+    
+            background.removeAttribute("class")
+            background.innerHTML = ""
+    
+        }, 980)
+        })
 }
 
 
 async function toastCreateDepartment (allCompanies) {
+
     let failed = new Array
     const companies = await allCompanies
 
@@ -219,7 +273,7 @@ async function toastCreateDepartment (allCompanies) {
     const toast = document.createElement("div")
     const divForm = document.createElement("div")
 
-    background.classList.add("background-new-department")
+    background.classList.add("background-new-department", "appear")
     toast.classList.add("toast-new-department")
     divForm.classList.add("div-inputs-new-department")
 
@@ -264,7 +318,9 @@ async function toastCreateDepartment (allCompanies) {
         option.id = `${company.uuid}`
         option.innerText = `${company.name}`
         select.appendChild(option)
+
     })
+
     form.append(inputName, inputDescription, select, btConfirmNewDepartment)
     divForm.appendChild(form)
     divTitle.append(title, btCloseModal)
@@ -300,30 +356,51 @@ async function toastCreateDepartment (allCompanies) {
                 if(failed.includes("Fail")){
                     toastResponse("Fail", "O departamento já existe.", "Por favor, crie um departamento inexistente.")
                 }else{
-                    toastResponse("Success", "Solicitação bem sucedida!", "Departamento criado com sucesso.")
-
+                    
                     const body = {
                         name: newName,
                         description: description,
                         company_uuid: choice
                     }
                     createDepartment(body)
+
+                    background.classList.remove("appear")
                     setTimeout(() => {
-                        window.location.reload()
-                    },4000)
+                        background.classList.add("desappear")
+                    }, 2980);
+                    
+                    setTimeout(() => {
+                        background.removeAttribute("class")
+                        background.innerHTML = ""
+                    }, 3980);
+
                 }
             }, 100);
     })
+
+    btCloseModal.addEventListener("click", event => {
+
+        background.classList.remove("appear")
+        background.classList.add("desappear")
+        
+        setTimeout(() => {
+    
+            background.removeAttribute("class")
+            background.innerHTML = ""
+    
+        }, 980)
+        })
 }
 
 
 function toastEditDescriptionDepartment (oldValues, idDepartment) {
+
     const body = document.querySelector("body")
     const background = document.createElement("div")
     const toast = document.createElement("div")
     const divForm = document.createElement("div")
 
-    background.classList.add("background-edit-department")
+    background.classList.add("background-edit-department", "appear")
     toast.classList.add("toast-edit-department")
     divForm.classList.add("div-input-edit-department")
 
@@ -344,7 +421,6 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
     const form = document.createElement("form")
     const inputDescription = document.createElement("input")
 
-/*     inputDescription.innerText = oldValues */
     inputDescription.setAttribute("placeholder", `Insira uma nova descrição`)
     inputDescription.setAttribute("value", oldValues)
     inputDescription.setAttribute("required", "required")
@@ -366,8 +442,32 @@ function toastEditDescriptionDepartment (oldValues, idDepartment) {
             description: inputDescription.value
         }
         editDescriptionDepartment(body, idDepartment)
+
+        background.classList.remove("appear")
+        setTimeout(() => {
+            background.classList.add("desappear")
+        }, 2980);
+        
+        setTimeout(() => {
+            background.removeAttribute("class")
+            background.innerHTML = ""
+        }, 3980);
     })
 
+    btCloseModal.addEventListener("click", () => {
+
+        background.classList.remove("appear")
+        background.classList.add("desappear")
+
+        setTimeout(() => {
+
+            background.removeAttribute("class")
+            background.innerHTML = ""
+
+        }, 980)
+
+
+    })
 }
 
 
@@ -384,7 +484,7 @@ async function toastViewDepartment (department) {
     const toast = document.createElement("div")
     const secContainers = document.createElement("section")
 
-    background.classList.add("background-view-department")
+    background.classList.add("background-view-department", "appear")
     toast.classList.add("toast-view-department")
     secContainers.classList.add("sec-containers-modal")
 
@@ -530,10 +630,22 @@ async function toastViewDepartment (department) {
 
 
     btCloseModal.addEventListener("click", event => {
-        background.innerHTML = ""
-        background.classList.remove("background-view-department")
+
+        background.classList.remove("appear")
+        background.classList.add("desappear")
         
+        setTimeout(() => {
+    
+            background.removeAttribute("class")
+            background.innerHTML = ""
+    
+        }, 980)
         })
+        /* btCloseModal.addEventListener("click", () => { */
+
+    
+
+        
 }
 
 

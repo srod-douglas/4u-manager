@@ -1,12 +1,15 @@
-import { urlAdmitUser, urlAllCompanies, 
+import { 
+    urlAdmitUser, urlAllCompanies, 
     urlAllUserNotWorking, 
     urlAllUsers, 
     urlDeleteUser, 
     urlDepartments, 
     urlUpdateUser 
 } from "../path.js";
+
 import { toastResponse } from "../toastAdmin.js";
 import { getTokenLocal } from '../localStorage.js'
+
 
 async function dataCompanies (token) {
     const request = await fetch(urlAllCompanies,{
@@ -29,6 +32,7 @@ async function dataCompanies (token) {
     }
 }
 
+
 async function dataUsers (token) {
     const request = await fetch(urlAllUsers,{
         method: "GET",
@@ -48,6 +52,7 @@ async function dataUsers (token) {
         console.log(err)
     }
 }
+
 
 async function refreshDataUser (idUser, body, tokenAdmin) {
     const request = await fetch(`${urlUpdateUser}${idUser}`,{
@@ -95,6 +100,7 @@ async function deleteDataUser (idUser) {
     }
 }
 
+
 async function allDepartments (tokenAdmin) {
     const request = await fetch(urlDepartments, {
         method: "GET",
@@ -118,6 +124,7 @@ async function allDepartments (tokenAdmin) {
     }
 }
 
+
 async function departmentsFromCompanySelected (idCompany) {
     const token = getTokenLocal()
     const request = await fetch(`${urlDepartments}/${idCompany}`, {
@@ -131,7 +138,7 @@ async function departmentsFromCompanySelected (idCompany) {
 
         if(request.ok){
             const departments = await request.json()
-            console.log(departments)
+
             return departments
         }else{
             console.log(request)
@@ -155,9 +162,9 @@ async function deleteDepartment (idDepartment) {
     try{
 
         if(request.ok){
-            console.log(request)
+            toastResponse("success", "Solicitação efetuada com sucesso!", "O departamento foi deletado.")
         }else{
-            console.log(request)
+            toastResponse("error", "Algo deu errado.", "Por favor, atualize a págine e tente novamente.")
         }
 
     }catch(err){
@@ -181,8 +188,10 @@ async function createDepartment (body) {
     try{
         if(request.ok){
             const success = await request.json()
+            toastResponse("success", "Solicitação bem sucedida!", "Departamento criado com sucesso.")
             return success
         }else{
+            toastResponse("Error", "Algo saiu errado.", "Por favor, tente novamente mais tarde.")
             console.log(request)
         }
     }catch(err){
@@ -204,7 +213,7 @@ async function editDescriptionDepartment (description, idDepartment){
 
     try{
         if(request.ok){
-            toastResponse("Success", "Solicitação bem sucedida!", "Descrição atualizada com sucesso.")
+            toastResponse("success", "Solicitação bem sucedida!", "Descrição atualizada com sucesso.")
         }else{
             toastResponse("Error", "Algo saiu errado.", "Por favor, tente novamente mais tarde.")
             console.log(request)
@@ -261,7 +270,6 @@ console.log(body)
 
     }
 }
-
 
 
 async function dataUsersFromDepartment (department) {

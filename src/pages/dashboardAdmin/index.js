@@ -41,10 +41,13 @@ setTimeout(() => {
     btsEditUser.forEach((bt) => {
         bt.addEventListener("click", async () => {
             const idUser = bt.id
-            console.log(idUser)
+
             const allUsers = await dataUsers(token.token)
+
             allUsers.forEach( async (user) => {
+
                 if(idUser == user.uuid){
+                    
                     editUserFromAdmin(user)
                 }
             })
@@ -77,7 +80,7 @@ setTimeout(() => {
         btCreateDepartment.onclick = async () => {
             await toastCreateDepartment(dataCompanies(token.token))
         }
-        const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
+        /* const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
         btsEditDepartments.forEach((bt)=>{
             bt.onclick = async (event) => {
                 event.preventDefault()
@@ -89,7 +92,7 @@ setTimeout(() => {
                     }
                 })
             }
-        })
+        }) */
         
         const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
 
@@ -123,8 +126,8 @@ setTimeout(() => {
 
                         btCloseViewDept.addEventListener("click", event => {
                         backgroundModal.innerHTML = ""
-                            console.log(backgroundModal)
-                            .log('clicou')
+                            
+                            
                         })
                         }
                     }
@@ -135,8 +138,7 @@ setTimeout(() => {
         
                         btCloseViewDept.addEventListener("click", event => {
                             backgroundModal.innerHTML = ""
-                            console.log(backgroundModal)
-                            console.log('clicou')
+                            
                         })
                     }
             }
