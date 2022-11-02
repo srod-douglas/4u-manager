@@ -8,16 +8,25 @@ async function toastEditProfileUser (user) {
     const view = document.querySelector("body")
     const background = document.createElement("div")
     const toast = document.createElement("div")
+    background.classList.add("appear")
+    toast.classList.add("appear")
+
+    background.classList.add("background-modal-edit")
+    toast.classList.add("body-modal-edit")
 
     const divTitle = document.createElement("div")
     const title = document.createElement("h2")
-    const btCloseToast = document.createElement("button")
+    const btCloseToast = document.createElement("span")
     const form = document.createElement("form")
     const inputName = document.createElement("input")
     const inputEmail = document.createElement("input")
     const inputPassword = document.createElement("input")
     const btSendEdits = document.createElement("button")
 
+    divTitle.classList.add("div-title-modal-edit-user")
+    title.classList.add("title-modal")
+    btCloseToast.classList.add("bt-close-modal")
+    btSendEdits.classList.add("bt-send-edits-modal")
 
     title.innerText = "Editar Perfil"
     btCloseToast.innerText = "x"
@@ -45,8 +54,15 @@ async function toastEditProfileUser (user) {
     view.appendChild(background)
 
     btCloseToast.onclick = () => {
-        background.innerHTML = ""
-        window.location.reload()
+
+        background.classList.remove("appear")
+        toast.classList.remove("appear")
+        background.classList.add("desappear")
+        toast.classList.add("desappear")
+        setTimeout(() => {
+            background.innerHTML = ""
+            background.classList.add("none")
+        }, 1000);
     }
 
     form.addEventListener("submit", async (event) => {
@@ -59,9 +75,53 @@ async function toastEditProfileUser (user) {
         }
         const token = getTokenLocal()
         await refreshDataUser(body, token.token)
-        background.innerHTML = "" /* CHANGE TO CLASS HIDDEN */
-        window.location.reload()
+
+
+        setTimeout(() => {
+            background.classList.remove("appear")
+            toast.classList.remove("appear")
+            background.classList.add("desappear")
+            toast.classList.add("desappear")
+        }, 3000);
+
+        setTimeout(() => {
+            background.innerHTML = ""
+            background.classList.add("none")
+        }, 4000);
     })
 }
 
-export { toastEditProfileUser }
+
+
+function toastOk (type, alert, message) {
+        const body = document.querySelector("body")
+    
+        const div = document.createElement("div")
+        const title = document.createElement("p")
+        const desc = document.createElement("span")
+    
+        div.classList.add("div-toast-alert")
+        div.classList.add("toast-alert")
+        title.classList.add("title-toast-alert")
+        desc.classList.add("desc-toast-alert")
+
+        if(type == "success"){
+            title.innerText = alert
+            desc.innerText = message
+            
+        }else{
+            title.innerText = alert
+            desc.innerText = message
+        }
+        
+        div.append(title, desc)
+        body.appendChild(div)
+        setTimeout(() => {
+            window.location.reload()
+        }, 4000);
+    
+}
+
+
+
+export { toastEditProfileUser, toastOk }

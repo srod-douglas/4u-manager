@@ -30,3 +30,52 @@
 button{
     cursor: pointer;
 }
+
+.none{
+    display: none;
+}
+
+.desappear{
+    animation: desappear 1s ease-in-out;
+}
+
+.appear{
+    animation: appear 1s ease-in-out;
+}
+
+.toast-alert{
+    animation: toastAlerts 3s ease-in infinite;
+}
+
+@keyframes desappear {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes toastAlerts {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(600px);
+    }
+    50%{
+        transform: translateY(600px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
