@@ -1,5 +1,6 @@
 import { urlLogin, urlVerifyAdmin } from '../path.js'
 import { setTokenLocal, setUserLocal } from '../localStorage.js'
+import { toastOk } from '../toastUser.js'
 
 async function checkLogin (body) {
     const request = await fetch(urlLogin, {
@@ -37,6 +38,7 @@ async function validateUser (token) {
         if(request.ok){
             setTokenLocal(admin)
             if(admin.is_admin){
+                toastOk("success", "Login Efetuado", "Redicionaremos para a sua Página Inicial.")
                 window.location.replace("../../pages/dashboardAdmin/index.html")
             }else{
                 window.location.replace("../../pages/dashboardUser/index.html")

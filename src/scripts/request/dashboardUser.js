@@ -42,6 +42,7 @@ async function refreshDataUser (body, token) {
             createUser(newData)
             toastOk("Success", "Solicitação efetuada.", "Perfil editado com sucesso.")
         }else{
+            toastOk("Error", "Algo deu errado.", "Por favor, confira seu email e senha para tentar novamente.")
             console.log(request)
         }
 
