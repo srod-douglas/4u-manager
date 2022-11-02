@@ -24,8 +24,7 @@ async function getDataUser (token) {
 }
 
 async function refreshDataUser (body, token) {
-    console.log(body)
-    console.log(token)
+
     const request = await fetch(urlRefreshUser, {
         method: "PATCH",
         headers: {
@@ -40,10 +39,10 @@ async function refreshDataUser (body, token) {
         if(request.ok){
             const newData = await request.json()
             createUser(newData)
-            toastOk("Success", "Solicitação efetuada.", "Perfil editado com sucesso.")
+            toastOk("success", "Solicitação efetuada.", "Perfil editado com sucesso.")
         }else{
             toastOk("Error", "Algo deu errado.", "Por favor, confira seu email e senha para tentar novamente.")
-            console.log(request)
+
         }
 
     }catch(err){

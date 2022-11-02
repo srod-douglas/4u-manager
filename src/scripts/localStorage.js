@@ -11,4 +11,5 @@ function getTokenLocal () {
     return JSON.parse(token)
 }
 
+
 export { setTokenLocal, setUserLocal, getTokenLocal }
