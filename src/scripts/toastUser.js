@@ -9,7 +9,7 @@ async function toastEditProfileUser (user) {
     const background = document.createElement("div")
     const toast = document.createElement("div")
     background.classList.add("appear")
-    toast.classList.add("appear")
+/*     toast.classList.add("appear") */
 
     background.classList.add("background-modal-edit")
     toast.classList.add("body-modal-edit")
@@ -53,7 +53,7 @@ async function toastEditProfileUser (user) {
     background.appendChild(toast)
     view.appendChild(background)
 
-    btCloseToast.onclick = () => {
+/*     btCloseToast.onclick = () => {
 
         background.classList.remove("appear")
         toast.classList.remove("appear")
@@ -63,16 +63,17 @@ async function toastEditProfileUser (user) {
             background.innerHTML = ""
             background.classList.add("none")
         }, 1000);
-    }
+    } */
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault()
 
         const body = {
             username: event.target.children[0].value,
-            email: event.target.children[1].value,
-            password: event.target.children[2].value
+            password: event.target.children[2].value,
+            email: event.target.children[1].value
         }
+
         const token = getTokenLocal()
         await refreshDataUser(body, token.token)
 
@@ -89,6 +90,20 @@ async function toastEditProfileUser (user) {
             background.classList.add("none")
         }, 4000);
     })
+
+    btCloseToast.addEventListener("click", () => {
+
+            background.classList.remove("appear")
+            background.classList.add("desappear")
+            
+            setTimeout(() => {
+        
+                background.removeAttribute("class")
+                background.innerHTML = ""
+        
+            }, 980)
+            })
+
 }
 
 
@@ -100,25 +115,27 @@ function toastOk (type, alert, message) {
         const title = document.createElement("p")
         const desc = document.createElement("span")
     
-        div.classList.add("div-toast-alert")
-        div.classList.add("toast-alert")
-        title.classList.add("title-toast-alert")
-        desc.classList.add("desc-toast-alert")
-
+        
         if(type == "success"){
+            div.classList.add("div-toast-response-green")
+            title.classList.add("title-toast-response-green")
+            desc.classList.add("desc-toast-response-green")
             title.innerText = alert
             desc.innerText = message
             
         }else{
+            div.classList.add("div-toast-response-red")
+            title.classList.add("title-toast-response-red")
+            desc.classList.add("desc-toast-response-red")
             title.innerText = alert
             desc.innerText = message
         }
         
         div.append(title, desc)
         body.appendChild(div)
-        setTimeout(() => {
+/*         setTimeout(() => {
             window.location.reload()
-        }, 4000);
+        }, 4000); */
     
 }
 

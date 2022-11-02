@@ -1,5 +1,6 @@
-import { dataDepartmentsCompanyUser, dataCompanyUser, getCoWorkersUser } from '../request/dashboardUser.js'
-
+import { getTokenLocal } from '../localStorage.js'
+import { dataDepartmentsCompanyUser, dataCompanyUser, getCoWorkersUser, getDataUser } from '../request/dashboardUser.js'
+import { toastEditProfileUser } from '../toastUser.js'
 
 async function createUser (data) {
     const responseData = await data
@@ -44,6 +45,15 @@ function renderUserNotWorks (user) {
     divName.append(name, icon)
     divInfosUser.append(email, level)
     secCompanie.appendChild(message)
+
+    
+        const token = getTokenLocal()
+        icon.addEventListener("click", () => {
+
+            toastEditProfileUser(getDataUser(token.token))
+        })
+    
+
 }
 
 async function renderUserWorks (user) {

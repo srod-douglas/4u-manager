@@ -4,9 +4,14 @@ import { getDataUser } from '../../scripts/request/dashboardUser.js'
 import { toastEditProfileUser } from '../../scripts/toastUser.js'
 
 
+if(localStorage.getItem("@admin") !== null){
+    window.location.replace("../../../index.html")
+    localStorage.removeItem("@user")
+    localStorage.removeItem("@admin")
+}
 const token = getTokenLocal()
 
-setTimeout(() => {
+/* setTimeout(() => {
 
     const icon = document.querySelector(".icon-edit")
 
@@ -17,7 +22,7 @@ setTimeout(() => {
             toastEditProfileUser(getDataUser(token.token))
         })
     }
-},400)
+},400) */
 
 
 const btLogout = document.querySelector("#logout")

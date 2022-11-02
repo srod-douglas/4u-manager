@@ -36,8 +36,8 @@ async function validateUser (token) {
     try{
         const admin = await request.json()
         if(request.ok){
-            setTokenLocal(admin)
             if(admin.is_admin){
+                setTokenLocal(admin)
                 toastOk("success", "Login Efetuado", "Redicionaremos para a sua Página Inicial.")
                 window.location.replace("../../pages/dashboardAdmin/index.html")
             }else{
