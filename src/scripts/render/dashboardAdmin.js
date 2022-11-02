@@ -1,6 +1,6 @@
-import { allDepartments, dataCompanies, departmentsFromCompanySelected, dataUsers } from "../request/dashboardAdmin.js"
+import { allDepartments, departmentsFromCompanySelected, dataUsers } from "../request/dashboardAdmin.js"
 import { getTokenLocal } from '../localStorage.js'
-import { toastViewDepartment, toastEditDescriptionDepartment, editUserFromAdmin, toastDeleteUser } from '../toastAdmin.js'
+import { toastViewDepartment, toastEditDescriptionDepartment, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment } from '../toastAdmin.js'
 
 
 async function renderAllDepartaments (response) {
@@ -83,12 +83,61 @@ async function renderAllDepartaments (response) {
             })
         }
     })
+    const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
+    btsDeleteDepartment.forEach((bt)=>{
+
+        bt.onclick = async (event) => {
+            event.preventDefault()
+            const allDepts = await allDepartments(token.token)
+
+            allDepts.forEach(async(department) => {
+                const idDepartment = await department.uuid
+
+                if(idDepartment == event.target.id){
+
+                    toastDeleteDepartment(idDepartment, department.name)
+
+                }
+            })
+        }
+    })
+    const btsViewerDepartments = document.querySelectorAll(".bt-view-department")
+
+    btsViewerDepartments.forEach((bt) => {
+
+        bt.addEventListener("click",async (event) => {
+            
+            event.preventDefault()
+            
+            const allDepts = await allDepartments(token.token)
+
+            allDepts.forEach(async(department) => {
+
+                const idDepartment = await department.uuid
+
+                if(idDepartment == event.target.id){
+
+                    const backgroundModal = document.querySelectorAll(".background-view-department")
+
+                    backgroundModal.forEach((div)=>{
+
+                        div.innerHTML=""
+                        backgroundModal.removeAttribute("class")
+                    })
+
+                    toastViewDepartment(department)
+
+                }
+            })
+
+        }
+    )})
 }
 
 
 async function renderAllUsers (data) {
     const users = await data
-    console.log(users)
+
     const ul = document.querySelector("#registeredUsers")
     ul.innerHTML = ""
 
@@ -140,7 +189,7 @@ async function renderAllUsers (data) {
             divInfos.append(name, level, company)
             card.append(divInfos, divBts)
             ul.appendChild(card)
-            console.log(card)
+
         }else{
            
         }
@@ -154,7 +203,7 @@ async function renderAllUsers (data) {
             const allUsers = await dataUsers(token.token)
             
             allUsers.forEach( async (user) => {
-                console.log(idUser, user.uuid)
+
 
                 if(idUser == user.uuid){
                     
@@ -281,7 +330,7 @@ async function renderFilteredDepartment (response) {
         }
     )})
 
-    const btsEditDepartments = document.querySelectorAll(".bt-edit-department")
+    const btsEditDepartments = document.querySelectorAll(".bt-del-department")
 
     btsEditDepartments.forEach((bt)=>{
 
@@ -294,7 +343,25 @@ async function renderFilteredDepartment (response) {
 
                 if(idDepartment == event.target.id){
 
-                    toastEditDescriptionDepartment(await department.description, idDepartment, data)
+                    toastDeleteDepartment(await department.description, idDepartment, data)
+
+                }
+            })
+        }
+    })
+    const btsDeleteDepartment = document.querySelectorAll(".bt-del-department")
+    btsDeleteDepartment.forEach((bt)=>{
+
+        bt.onclick = async (event) => {
+            event.preventDefault()
+            const allDepts = await allDepartments(token.token)
+
+            allDepts.forEach(async(department) => {
+                const idDepartment = await department.uuid
+
+                if(idDepartment == event.target.id){
+
+                    toastDeleteDepartment(idDepartment, department.name)
 
                 }
             })
