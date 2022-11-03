@@ -4,53 +4,39 @@ import { renderCompaniesHome, renderFilteredSector, renderSectorsHome } from '..
 
 renderCompaniesHome()
 renderSectorsHome()
-/* const divBts = document.querySelector(".div-bts-redirect-home")
-const close = document.querySelector("#vectorClose")
+
+const flex = "flex"
+const hidden = "none"
+
+
 const hamburguer = document.querySelector("#vector")
-const largura = screen.width
-let mobile = new Boolean
+const close = document.querySelector("#vectorClose")
+const divBtsRedirect = document.querySelector(".div-bts-redirect-home")
 
-console.log(typeof largura)
-largura.addEventListener("change", () =>{
-    if(largura <= 767){
-        mobile = true
-    }else{
-        mobile = false
-    }
-
-})
-
-console.log(mobile)
-console.log(`Largura: ${largura}`)
-
-if(window.innerWidth <= 767){
-
-    hamburguer.style.display = "flex"
-    close.style.display = "none"
-    divBts.style.display = "none"
-
-}
-
-if(window.innerWidth >= 768){
-    hamburguer.style.display = "none"
-    close.style.display = "none"
-    divBts.style.display = "flex"
-}
 hamburguer.addEventListener("click", () => {
-    hamburguer.style.display = "none"
-    close.style.display = "flex"
-    divBts.style.display = "flex"
+
+    hamburguer.classList.toggle("none")
+    close.classList.toggle("none")
+
+    if(divBtsRedirect.style.display = hidden){
+        divBtsRedirect.classList.add("appear")
+        divBtsRedirect.style.display = flex
+    }
 })
 
-
-if(hamburguer.style.display = "none"){
 close.addEventListener("click", () => {
-    close.style.display = "none"
-    hamburguer.style.display = "flex"
-    divBts.style.display = "none"
-})} */
 
+    hamburguer.classList.toggle("none")
+    close.classList.toggle("none")
 
+    if(divBtsRedirect.style.display = flex){
+        divBtsRedirect.classList.remove("appear")
+        divBtsRedirect.classList.add("desappear")
+        setTimeout(() => {
+            divBtsRedirect.style.display = hidden
+        }, 990);
+    }
+})
 
 const select = document.querySelector("select")
 const bts = document.querySelectorAll("button")
