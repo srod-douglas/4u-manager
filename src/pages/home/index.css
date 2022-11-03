@@ -2,6 +2,7 @@ body{
     height: 100vh;
     width: 100vw;
     animation: entryPages 1s ease-in;
+    background-color: rgba(0, 0, 0, .02);
 }
 
 main{
@@ -12,6 +13,7 @@ main{
 }
 
 header{
+    background-color: var(--color-white);
     width: 100%;
     margin-bottom: 2rem;
     padding: 0 20%;
@@ -77,6 +79,7 @@ header > div > img {
     justify-content: space-between;
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--color-blue);
+    background-color: var(--color-white);
 }
 
 .name-company{
@@ -98,7 +101,9 @@ header > div > img {
     font-weight: 400;
     color: var(--color-blue);
 }
-
+.flex{
+    display: flex;
+}
 @keyframes entryPages {
     0%{
         opacity: 0;
@@ -110,102 +115,141 @@ header > div > img {
 
 @media (max-width: 767px){
     body{
-        width: 100vw;
+        width: 100%;
+        max-width: 766px;
     }
+
     main{
-        width: 100vw;
-        margin: 0 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 766px;
+        margin: 0 auto;
+        height: max-content;
     }
+
     header{
-        width: 100vw;
+        padding: 0 1rem;
         display: flex;
         justify-content: space-between;
-        padding: 0 4rem 0 1rem;
-
+        width: 100%;
+        max-width: 766px;
+        box-shadow: none;
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+        height: 60px;
     }
+
+    header > div{
+        width: 100%;
+        max-width: 766px;
+    }
+
     header > div > h1{
         font-size: var(--font-size-1);
     }
+
+    .container-vectors{
+        width: 200px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: -8vh;
+        position: absolute;
+    }
+
     .sec-left{
         display: none;
+        width: 0;
+        max-width: 0;
+        margin: 0;
     }
-    .container-filter{
-        width: 100vw;
+
+    .sec-left > img {
+        width: 0px;
+        height: 0;
     }
+
     .div-bts-redirect-home{
-        display: none;
+        display:none;
         position: fixed;
-        top: 5rem;
-        right: .8rem;
-        width: 100vw;
+        width: 90%;
+        max-width: 766px;
         height: 95px;
-        justify-content: space-between;
-        padding: 0 2rem;
+        justify-content: space-around;
         align-items: center;
         background-color: var(--color-white);
         box-shadow: rgba(0, 0, 0, 0.24) .1rem .1rem 4px;
+        top: 6%;
+        right: 12%;
     }
+
     #vector{
-        display: flex;
-        position: fixed;
-        right: 1rem;
-        top: 2rem;
+        margin: 0;
     }
+
     #vectorClose{
-        display: none;
-        position: fixed;
-        right: 1rem;
-        top: 2rem;
+        margin: 0;
     }
+
     #registeredCompanies{
+        width: 95%;
+        max-width:766px;
         display: flex;
         flex-direction: row;
-        overflow-x: auto;
-        height: 300px;
+        height: 250px;
+        padding: 0;
+        box-sizing:content-box;
+        margin: 0 auto 0 .5rem;
     }
+
     #reference{
-        width: 94vw;
-        margin-left: 0;
+        width: 95%;
+        max-width: 766px;
+        margin: 1rem auto 0 .5rem;
         background-color: var(--color-blue);
         color: var(--color-white);
-        padding-left: 6rem;
+        margin-bottom: 1rem;
         font-size: var(--font-size-2);
         font-weight: 400;
+        padding-left: 21%;
+        height: 52px;
     }
-    .card-company-home{
-        width: 241px;
-        height: 211px;
-        margin-right: 2rem;
-        padding-bottom: 42px;
 
+    .card-company-home{
+        box-sizing: border-box;
+        width: 280px;
+        height: 211px;
+        padding-bottom: 42px;
+        margin-right: 2rem;
     }
+
     .open-hour-company{
         margin-top: 30px;
     }
+
     .sector-company{
         margin-top: -14px;
+    }
 
+    .container-filter{
+        box-shadow: none;
+        margin: 0 auto;
+        box-shadow: 0;
+        width: 100%;
+        max-width: 766px;
+        height: 400px;
     }
 }
 
+
 @media (min-width: 768px){
-    #vector{
+    
+    
+    .container-vectors{
         display: none;
-    }
-    #vectorClose{
-        display: none;
-    }
-    main {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        justify-content: space-between;
-        background-image: url(../../assets/img/Rectangle7.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        justify-content: center;
-        align-items: center;
     }
     
     header {
@@ -231,7 +275,6 @@ header > div > img {
     }
     
     .div-bts-redirect {
-        position:absolute;
         right: 10rem;
         width: 320px;
         display: flex;

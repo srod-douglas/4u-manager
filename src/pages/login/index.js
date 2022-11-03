@@ -4,31 +4,36 @@ const form = document.querySelector("form")
 const bts = document.querySelectorAll("button")
 
 
+const hidden = "none"
+const flex = "flex"
+const hamburguer = document.querySelector("#vector")
+const close = document.querySelector("#vectorClose")
+const divBtsRedirect = document.querySelector(".div-bts-redirect-home")
 
-const divBts = document.querySelector(".div-bts-redirect-home")
-const vectClose = document.querySelector("#vectorClose")
-const vect = document.querySelector("#vector")
-    
+hamburguer.addEventListener("click", () => {
 
-if(vect.style.display == "none"){
+    hamburguer.classList.toggle("none")
+    close.classList.toggle("none")
 
-    divBts.style.display = "flex"
-}
-
-    
-vect.addEventListener("click", () => {
-    vect.classList.toggle("none")
-    divBts.style.display = "flex"
-    vectClose.classList.toggle("none")
-})
-    
-vectClose.addEventListener("click", () => {
-    vect.classList.toggle("none")
-    divBts.style.display = "none"
-    vectClose.classList.toggle("none")
+    if(divBtsRedirect.style.display = hidden){
+        divBtsRedirect.classList.add("appear")
+        divBtsRedirect.style.display = flex
+    }
 })
 
+close.addEventListener("click", () => {
 
+    hamburguer.classList.toggle("none")
+    close.classList.toggle("none")
+
+    if(divBtsRedirect.style.display = flex){
+        divBtsRedirect.classList.remove("appear")
+        divBtsRedirect.classList.add("desappear")
+        setTimeout(() => {
+            divBtsRedirect.style.display = hidden
+        }, 990);
+    }
+})
 
 
 bts.forEach((bt)=>{

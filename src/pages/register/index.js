@@ -4,22 +4,39 @@ const form = document.querySelector("form")
 
 const bts = document.querySelectorAll("button")
 
-const divBts = document.querySelector(".div-bts-redirect-home")
-const vectClose = document.querySelector("#vectorClose")
-const vect = document.querySelector("#vector")
+const hidden = "none"
+const flex = "flex"
+const hamburguer = document.querySelector("#vector")
+const close = document.querySelector("#vectorClose")
+const divBtsRedirect = document.querySelector(".div-bts-redirect-home")
 
-divBts.style.display = "none"
+/* if(hamburguer.style.display = hidden && close.style.display = hidden){
+    divBtsRedirect.style.display = flex
+} */
 
-vect.addEventListener("click", () => {
-    vect.classList.toggle("none")
-    divBts.style.display = "flex"
-    vectClose.classList.toggle("none")
+hamburguer.addEventListener("click", () => {
+
+    hamburguer.classList.toggle("none")
+    close.classList.toggle("none")
+
+    if(divBtsRedirect.style.display = hidden){
+        divBtsRedirect.classList.add("appear")
+        divBtsRedirect.style.display = flex
+    }
 })
 
-vectClose.addEventListener("click", () => {
-    vect.classList.toggle("none")
-    divBts.style.display = "none"
-    vectClose.classList.toggle("none")
+close.addEventListener("click", () => {
+
+    hamburguer.classList.toggle("none")
+    close.classList.toggle("none")
+
+    if(divBtsRedirect.style.display = flex){
+        divBtsRedirect.classList.remove("appear")
+        divBtsRedirect.classList.add("desappear")
+        setTimeout(() => {
+            divBtsRedirect.style.display = hidden
+        }, 990);
+    }
 })
 
 
@@ -28,6 +45,8 @@ bts.forEach((bt)=>{
         if(bt.id == "btLogin"){
             window.location.replace(`${bt.dataset.path}`)
         }if(bt.id == "btRegister"){
+            window.location.replace(`${bt.dataset.path}`)
+        }if(bt.id == "return"){
             window.location.replace(`${bt.dataset.path}`)
         }
     }
