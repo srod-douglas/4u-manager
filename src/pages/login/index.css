@@ -120,3 +120,47 @@ input {
         opacity: 1;
     }
 }
+
+@media (max-width: 767px){
+    body{
+        width: 100vw;
+    }
+    main{
+        width: 100vw;
+        margin: 0 0;
+    }
+    header{
+        position: fixed;
+        background-color: var(--color-white);
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4rem 0 1rem;
+
+    }
+    header > div > h1{
+        font-size: var(--font-size-1);
+    }
+    .div-bts-redirect-home{
+        position: fixed;
+        top: 3.7rem;
+        right: .1rem;
+        width: 100vw;
+        height: 95px;
+        justify-content: space-between;
+        padding: 0 2rem;
+        align-items: center;
+        background-color: var(--color-white);
+        box-shadow: rgba(0, 0, 0, 0.24) .1rem .1rem 4px;
+    }
+    #vector{
+        position: fixed;
+        right: 1rem;
+        top: 1.3rem;
+    }
+    #vectorClose{
+        position: fixed;
+        right: 1rem;
+        top: 1.3rem;
+    }
+}
