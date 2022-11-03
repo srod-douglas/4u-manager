@@ -151,13 +151,13 @@ async function renderAllUsers (data) {
         const name = document.createElement("h2")
         const level = document.createElement("p")
         const company = document.createElement("span")
-
+        
         const btEdit = document.createElement("img")
         const btDel = document.createElement("img")
-
+        
         name.innerText = user.username
         level.innerText = user.professional_level
-
+        
         if(user.department_uuid == null){
             company.innerText = ""
         }else{
@@ -178,11 +178,41 @@ async function renderAllUsers (data) {
         btEdit.src = '../../assets/img/pen-to-square-solid.svg'
         btEdit.alt = 'Icone para editar'
         btEdit.id = user.uuid
+        
+        
+        btEdit.addEventListener("click", async (event) => {
+            const token = getTokenLocal()
+            
+            const idUser = event.target.id
+            const allUsers = await dataUsers(token.token)
+            
+            allUsers.forEach( async (user) => {
+            
+            
+                if(idUser == user.uuid){
+                    
+                    editUserFromAdmin(user)
+                }
+            })
+            console.log("click")
+        })
 
         btDel.classList.add("bt-del-user")
         btDel.src = '../../assets/img/trash-can-solid.svg'
         btDel.alt = 'Icone para excluir'
         btDel.id = user.uuid
+        
+        btDel.addEventListener("click", async (event) => {
+            const token = getTokenLocal()
+            const idUser = event.target.id
+            const allUsers = await dataUsers(token.token)
+            allUsers.forEach( async (user) => {
+                if(idUser == user.uuid){
+                    toastDeleteUser(user)
+                }
+            })
+            })
+        
 
         if(!user.is_admin){
             divBts.append(btEdit, btDel)
@@ -195,39 +225,8 @@ async function renderAllUsers (data) {
         }
 
     })
-    const btsEdit = document.querySelectorAll(".bt-edit-user")
-    const token = getTokenLocal()
-    btsEdit.forEach((bt) => {
-        bt.addEventListener("click", async () => {
-            const idUser = bt.id
-            const allUsers = await dataUsers(token.token)
-            
-            allUsers.forEach( async (user) => {
-
-
-                if(idUser == user.uuid){
-                    
-                    editUserFromAdmin(user)
-                }
-            })
-        })
-    })
-
-    const btsDeleteUser = document.querySelectorAll(".bt-del-user")
-    btsDeleteUser.forEach((bt) => {
-        bt.addEventListener("click", async () => {
-            const idUser = bt.id
-            const allUsers = await dataUsers(token.token)
-            allUsers.forEach( async (user) => {
-                if(idUser == user.uuid){
-                    toastDeleteUser(user)
-                }
-            })
-            })
-        })
 
 }
-
 
 async function filterCompanies (dataCompanies) {
     const data = await dataCompanies
