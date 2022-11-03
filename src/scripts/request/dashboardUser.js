@@ -33,7 +33,7 @@ async function refreshDataUser (body, token) {
         },
         body: JSON.stringify(body),
     })
-
+console.log(body)
     try{
 
         if(request.ok){

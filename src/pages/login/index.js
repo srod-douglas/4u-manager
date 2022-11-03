@@ -9,7 +9,12 @@ const divBts = document.querySelector(".div-bts-redirect-home")
 const vectClose = document.querySelector("#vectorClose")
 const vect = document.querySelector("#vector")
     
-divBts.style.display = "none"
+
+if(vect.style.display == "none"){
+
+    divBts.style.display = "flex"
+}
+
     
 vect.addEventListener("click", () => {
     vect.classList.toggle("none")

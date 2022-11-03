@@ -4,21 +4,52 @@ import { renderCompaniesHome, renderFilteredSector, renderSectorsHome } from '..
 
 renderCompaniesHome()
 renderSectorsHome()
-const divBts = document.querySelector(".div-bts-redirect-home")
-const vectClose = document.querySelector("#vectorClose")
-const vect = document.querySelector("#vector")
-divBts.style.display = "none"
-vect.addEventListener("click", () => {
-    vect.classList.toggle("none")
-    divBts.style.display = "flex"
-    vectClose.classList.toggle("none")
+/* const divBts = document.querySelector(".div-bts-redirect-home")
+const close = document.querySelector("#vectorClose")
+const hamburguer = document.querySelector("#vector")
+const largura = screen.width
+let mobile = new Boolean
+
+console.log(typeof largura)
+largura.addEventListener("change", () =>{
+    if(largura <= 767){
+        mobile = true
+    }else{
+        mobile = false
+    }
+
 })
 
-vectClose.addEventListener("click", () => {
-    vect.classList.toggle("none")
+console.log(mobile)
+console.log(`Largura: ${largura}`)
+
+if(window.innerWidth <= 767){
+
+    hamburguer.style.display = "flex"
+    close.style.display = "none"
     divBts.style.display = "none"
-    vectClose.classList.toggle("none")
+
+}
+
+if(window.innerWidth >= 768){
+    hamburguer.style.display = "none"
+    close.style.display = "none"
+    divBts.style.display = "flex"
+}
+hamburguer.addEventListener("click", () => {
+    hamburguer.style.display = "none"
+    close.style.display = "flex"
+    divBts.style.display = "flex"
 })
+
+
+if(hamburguer.style.display = "none"){
+close.addEventListener("click", () => {
+    close.style.display = "none"
+    hamburguer.style.display = "flex"
+    divBts.style.display = "none"
+})} */
+
 
 
 const select = document.querySelector("select")
