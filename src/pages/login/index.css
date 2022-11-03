@@ -132,38 +132,69 @@ input {
         margin: 0 0;
     }
     header{
-        position: fixed;
-        background-color: var(--color-white);
-        width: 100vw;
+        padding: 0 1rem;
         display: flex;
         justify-content: space-between;
-        padding: 0 4rem 0 1rem;
-
+        width: 100%;
+        max-width: 766px;
+        box-shadow: none;
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+        height: 60px;
     }
+
+    header > div{
+        width: 100%;
+        max-width: 766px;
+    }
+
     header > div > h1{
         font-size: var(--font-size-1);
     }
+
+    .container-vectors{
+        width: 200px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: -8vh;
+        position: absolute;
+    }
+
+    .sec-left{
+        display: none;
+        width: 0;
+        max-width: 0;
+        margin: 0;
+    }
+
+    .sec-left > img {
+        width: 0px;
+        height: 0;
+    }
+
     .div-bts-redirect-home{
+        display:none;
         position: fixed;
-        top: 3.7rem;
-        right: .1rem;
-        width: 100vw;
+        width: 90%;
+        max-width: 766px;
         height: 95px;
-        justify-content: space-between;
-        padding: 0 2rem;
+        justify-content: space-around;
         align-items: center;
         background-color: var(--color-white);
         box-shadow: rgba(0, 0, 0, 0.24) .1rem .1rem 4px;
+        top: 6%;
+        right: 12%;
     }
+
     #vector{
-        position: fixed;
-        right: 1rem;
-        top: 1.3rem;
+        margin: 0;
     }
+
     #vectorClose{
-        position: fixed;
-        right: 1rem;
-        top: 1.3rem;
+        margin: 0;
     }
     section{
         height: 70vh;
