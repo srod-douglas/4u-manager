@@ -29,6 +29,8 @@ bts.forEach((bt)=>{
             window.location.replace(`${bt.dataset.path}`)
         }if(bt.id == "btRegister"){
             window.location.replace(`${bt.dataset.path}`)
+        }if(bt.id == "return"){
+            window.location.replace(`${bt.dataset.path}`)
         }
     }
 })
