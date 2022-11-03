@@ -107,3 +107,80 @@ header > div > img {
         opacity: 1;
     }
 }
+
+@media (max-width: 767px){
+    body{
+        width: 100vw;
+    }
+    main{
+        width: 100vw;
+        margin: 0 0;
+    }
+    header{
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4rem 0 1rem;
+
+    }
+    header > div > h1{
+        font-size: var(--font-size-1);
+    }
+    .sec-left{
+        display: none;
+    }
+    .container-filter{
+        width: 100vw;
+    }
+    .div-bts-redirect-home{
+        position: fixed;
+        top: 5rem;
+        right: .8rem;
+        width: 100vw;
+        height: 95px;
+        justify-content: space-between;
+        padding: 0 2rem;
+        align-items: center;
+        background-color: var(--color-white);
+        box-shadow: rgba(0, 0, 0, 0.24) .1rem .1rem 4px;
+    }
+    #vector{
+        position: fixed;
+        right: 1rem;
+        top: 2rem;
+    }
+    #vectorClose{
+        position: fixed;
+        right: 1rem;
+        top: 2rem;
+    }
+    #registeredCompanies{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        height: 300px;
+    }
+    #reference{
+        width: 94vw;
+        margin-left: 0;
+        background-color: var(--color-blue);
+        color: var(--color-white);
+        padding-left: 6rem;
+        font-size: var(--font-size-2);
+        font-weight: 400;
+    }
+    .card-company-home{
+        width: 241px;
+        height: 211px;
+        margin-right: 2rem;
+        padding-bottom: 42px;
+
+    }
+    .open-hour-company{
+        margin-top: 30px;
+    }
+    .sector-company{
+        margin-top: -14px;
+
+    }
+}
