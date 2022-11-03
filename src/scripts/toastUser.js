@@ -1,5 +1,5 @@
 import { getTokenLocal } from './localStorage.js'
-import { refreshDataUser } from './request/dashboardUser.js'
+import { getDataUser, refreshDataUser } from './request/dashboardUser.js'
 
 async function toastEditProfileUser (user) {
 
@@ -9,7 +9,6 @@ async function toastEditProfileUser (user) {
     const background = document.createElement("div")
     const toast = document.createElement("div")
     background.classList.add("appear")
-/*     toast.classList.add("appear") */
 
     background.classList.add("background-modal-edit")
     toast.classList.add("body-modal-edit")
@@ -53,30 +52,28 @@ async function toastEditProfileUser (user) {
     background.appendChild(toast)
     view.appendChild(background)
 
-/*     btCloseToast.onclick = () => {
-
-        background.classList.remove("appear")
-        toast.classList.remove("appear")
-        background.classList.add("desappear")
-        toast.classList.add("desappear")
-        setTimeout(() => {
-            background.innerHTML = ""
-            background.classList.add("none")
-        }, 1000);
-    } */
+    const token = getTokenLocal()
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault()
 
-        const body = {
-            username: event.target.children[0].value,
-            password: event.target.children[2].value,
-            email: event.target.children[1].value
-        }
+        const dataUser = await getDataUser(token.token)
 
-        const token = getTokenLocal()
-        await refreshDataUser(body, token.token)
-
+            if(dataUser.email == event.target.children[1].value){
+                const body = {
+                    username: event.target.children[0].value,
+                    password: event.target.children[2].value,
+                    
+                }
+                refreshDataUser(body, token.token)
+            }else{
+                const body = {
+                    username: event.target.children[0].value,
+                    password: event.target.children[2].value,
+                    email: event.target.children[1].value
+                }
+                refreshDataUser(body, token.token)
+            }
 
         setTimeout(() => {
             background.classList.remove("appear")
@@ -103,7 +100,6 @@ async function toastEditProfileUser (user) {
         
             }, 980)
             })
-
 }
 
 
@@ -133,12 +129,7 @@ function toastOk (type, alert, message) {
         
         div.append(title, desc)
         body.appendChild(div)
-/*         setTimeout(() => {
-            window.location.reload()
-        }, 4000); */
     
 }
-
-
 
 export { toastEditProfileUser, toastOk }
