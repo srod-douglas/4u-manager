@@ -244,24 +244,12 @@ header > div > img {
     }
 }
 
+
 @media (min-width: 768px){
-    #vector{
+    
+    
+    .container-vectors{
         display: none;
-    }
-    #vectorClose{
-        display: none;
-    }
-    main {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        justify-content: space-between;
-        background-image: url(../../assets/img/Rectangle7.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        justify-content: center;
-        align-items: center;
     }
     
     header {

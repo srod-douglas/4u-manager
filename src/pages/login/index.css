@@ -204,6 +204,9 @@ input {
     }
 }
 @media (min-width: 768px){
+    .container-vectors{
+        display: none;
+    }
     #vector{
         display: none;
     }
@@ -245,7 +248,7 @@ input {
         margin-right: 1rem;
     }
     
-    .div-bts-redirect {
+    .div-bts-redirect-home {
         width: 320px;
         display: flex;
         justify-content: space-between;
