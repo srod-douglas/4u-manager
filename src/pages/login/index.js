@@ -3,6 +3,29 @@ import { checkLogin } from "../../scripts/request/login.js"
 const form = document.querySelector("form")
 const bts = document.querySelectorAll("button")
 
+
+
+const divBts = document.querySelector(".div-bts-redirect-home")
+const vectClose = document.querySelector("#vectorClose")
+const vect = document.querySelector("#vector")
+    
+divBts.style.display = "none"
+    
+vect.addEventListener("click", () => {
+    vect.classList.toggle("none")
+    divBts.style.display = "flex"
+    vectClose.classList.toggle("none")
+})
+    
+vectClose.addEventListener("click", () => {
+    vect.classList.toggle("none")
+    divBts.style.display = "none"
+    vectClose.classList.toggle("none")
+})
+
+
+
+
 bts.forEach((bt)=>{
     bt.onclick = () => {
 
