@@ -8,6 +8,11 @@ if(localStorage.getItem("@admin") !== null){
     localStorage.removeItem("@user")
     localStorage.removeItem("@admin")
 }
+
+if(localStorage.getItem("@user") == null){
+    window.location.replace("../../../index.html")
+}
+
 const token = getTokenLocal()
 
 const btLogout = document.querySelector("#logout")

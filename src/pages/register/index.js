@@ -10,9 +10,6 @@ const hamburguer = document.querySelector("#vector")
 const close = document.querySelector("#vectorClose")
 const divBtsRedirect = document.querySelector(".div-bts-redirect-home")
 
-/* if(hamburguer.style.display = hidden && close.style.display = hidden){
-    divBtsRedirect.style.display = flex
-} */
 
 hamburguer.addEventListener("click", () => {
 
