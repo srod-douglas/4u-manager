@@ -1,12 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <title>Kenzie Empresas - Login</title>
 </head>
 <body>
-    
+    <header>
+        <div>
+            <img src="../../assets/img/logo.svg" alt="Icone da plataforma">
+            <h1>Kenzie Empresas</h1>
+        </div>
+        <div class="container-vectors">
+            <img id="vector" class="" src="../../../src/assets/img/Vector.svg" alt="">
+            <img id="vectorClose" class="none" src="../../../src/assets/img/vector-close.svg" alt="">
+        </div>
+        <div class="div-bts-redirect-home">
+            <button class="bt-blue" data-path="../../../index.html">Home</button>
+            <button class="bt-blue-inverse" data-path="../../pages/register/index.html">Cadastro</button>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h1 class="title-login">Login</h1>
+            <h2 class="form-instructions">Preencha os campos para realizar o login</h2>
+            <form action="">
+                <input type="email" name="email" placeholder="Seu email" required>
+                <input type="password" name="password" placeholder="Sua senha"required>
+                <button id="btLogin" type="submit">Login</button>
+                <span>ou</span>
+            </form>
+            <button class="bt-to-register" data-path="../register/index.html">Cadastre-se</button>
+        </section>
+    </main>
+    <script type="module" src="./index.js"></script>
 </body>
 </html>
