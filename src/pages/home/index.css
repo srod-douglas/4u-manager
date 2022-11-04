@@ -23,6 +23,7 @@ header{
     height: 80px;
     box-shadow: 0px 2px rgba(0, 0, 0, .1);
 }
+
 header > div{
     display: flex;
 }
@@ -59,7 +60,6 @@ header > div > img {
 #registeredCompanies{
     overflow-y:auto;
     height: 72vh;
-
 }
 
 #reference{
@@ -101,9 +101,11 @@ header > div > img {
     font-weight: 400;
     color: var(--color-blue);
 }
+
 .flex{
     display: flex;
 }
+
 @keyframes entryPages {
     0%{
         opacity: 0;
@@ -244,10 +246,8 @@ header > div > img {
     }
 }
 
-
 @media (min-width: 768px){
-    
-    
+
     .container-vectors{
         display: none;
     }

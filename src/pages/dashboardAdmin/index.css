@@ -40,7 +40,6 @@ header > div > img {
     margin-bottom: .2rem;
     padding: 1rem;
     color: rgba(0, 0, 0, 0.5);
-
 }
 
 #departments{
@@ -50,7 +49,6 @@ header > div > img {
     width: 100%;
     height: 24rem;
     overflow-x: auto;
-
 }
 
 #departments > li {
@@ -68,8 +66,6 @@ header > div > img {
 #departments > li:hover{
     border-left: 1px solid var(--color-blue);
 }
-
-
 
 .div-infos-departments-admin {
     height: 8rem;
@@ -97,32 +93,19 @@ header > div > img {
     transform: scaleY(150%);
 }
 
-
 .toast-body{
     width: 500px;
 }
-
-/* select{
-    width: 40%;
-    height: 3.25rem;
-    margin-bottom: .8rem;
-    padding: 1rem;
-    color: rgba(0, 0, 0, 0.5);
-} */
 
 option{
     background-color: rgba(0, 0, 0, 0.2);
     font-size: var(--font-size-1);
 }
 
-
 select:hover{
     color: #000;
     border: 1px solid black;
 }
-
-
-
 
 .sec-users{
     margin-top: 4.375rem;
@@ -193,14 +176,7 @@ select:hover{
 
 .bt-cancel-edit-department{
     font-size: var(--font-size-4);
-
 }
-
-
-
-
-
-
 
 .background-delete-department{
     height: 100%;
@@ -252,11 +228,6 @@ select:hover{
     background-color: var(--color-white);
 }
 
-
-
-
-
-
 .background-edit-department{
     height: 100%;
     width: 100%;
@@ -296,9 +267,6 @@ select:hover{
     color: var(--color-blue);
     background-color: var(--color-white);
 }
-
-
-
 
 .background-new-department{
     height: 100%;
@@ -387,9 +355,6 @@ select:hover{
     font-weight: 700;
 }
 
-
-
-
 .background-view-department{
     height: 100%;
     width: 100%;
@@ -400,8 +365,6 @@ select:hover{
     top: 0;
 }
 
-
-
 .toast-view-department{
     margin: 0 auto;
     width: 70%;
@@ -409,7 +372,6 @@ select:hover{
     background-color: var(--color-white);
     position: relative;
 }
-
 
 .div-title-view-department{
     display: flex;
@@ -427,7 +389,6 @@ select:hover{
     font-size: var(--font-size-7);
     font-weight: 700;
 }
-
 
 .sec-containers-modal{
     display: flex;
@@ -471,16 +432,16 @@ select:hover{
 }
 
 .ul-bottom-toast-view-department > li {
-width: 306px;
-height: 196px;
-border-top: 1px solid var(--color-white);
-border-bottom: 1px solid var(--color-blue);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between;
-transition: .6s;
-margin-right: 1rem;
+    width: 306px;
+    height: 196px;
+    border-top: 1px solid var(--color-white);
+    border-bottom: 1px solid var(--color-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: .6s;
+    margin-right: 1rem;
 }
 
 .ul-bottom-toast-view-department > li:hover{
@@ -488,11 +449,10 @@ margin-right: 1rem;
     border-bottom: 1px solid var(--color-red);
 }
 
-
 .div-infos-users-same-dept{
     margin-left: 2rem;
     width: 286px;
-height: 176px;
+    height: 176px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -500,10 +460,6 @@ height: 176px;
     margin-top: 10%;
     margin-bottom: 1rem;
 }
-
-
-
-/*                           */
 
 .toast-background{
     height: 100%;
@@ -514,7 +470,6 @@ height: 176px;
     position: fixed;
     top: 0;
 }
-
 
 
 .toast-body{
@@ -548,7 +503,6 @@ height: 176px;
     color: var(--color-white);
     border: none;
 }
-
 
 @keyframes entryPages {
     0%{

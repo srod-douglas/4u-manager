@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 *{
     list-style: none;
     box-sizing: border-box;
@@ -9,7 +10,6 @@
 }
 
 :root{
-
     --color-blue: #4200FF;
     --color-white: #FFFFFF;
     --color-black: #000000;
@@ -24,7 +24,6 @@
     --font-size-6: 2rem;
     --font-size-7: 2.25rem;
     --font-size-8: 2.5rem;
-
 }
 
 button{
@@ -42,29 +41,6 @@ button{
 .appear{
     animation: appear 1s ease-in;
 }
-
-/* .toast-alert{
-    animation: toastAlerts 3s ease-in infinite;
-} */
-
-/* .div-toast-alert{
-    width: 400px;
-    height: 300px;
-    position: absolute;
-    bottom: -400px;
-    right: 100px;
-    border: 1px solid var(--color-green);
-    border-radius: 1rem;
-    animation: toastAlerts 3s ease-in infinite;
-}
-
-.title-toast-alert{
-    
-}
-
-.desc-toast-alert{
-
-} */
 
 .div-toast-response-red{
     position: fixed;
@@ -117,11 +93,6 @@ button{
 .desc-toast-response-green{
     color: var(--color-white);
 }
-
-
-
-
-
 
 @keyframes desappear {
     0%{

@@ -3,7 +3,6 @@ import { checkLogin } from "../../scripts/request/login.js"
 const form = document.querySelector("form")
 const bts = document.querySelectorAll("button")
 
-
 const hidden = "none"
 const flex = "flex"
 const hamburguer = document.querySelector("#vector")
@@ -16,8 +15,10 @@ hamburguer.addEventListener("click", () => {
     close.classList.toggle("none")
 
     if(divBtsRedirect.style.display = hidden){
+
         divBtsRedirect.classList.add("appear")
         divBtsRedirect.style.display = flex
+
     }
 })
 
@@ -27,8 +28,10 @@ close.addEventListener("click", () => {
     close.classList.toggle("none")
 
     if(divBtsRedirect.style.display = flex){
+
         divBtsRedirect.classList.remove("appear")
         divBtsRedirect.classList.add("desappear")
+
         setTimeout(() => {
             divBtsRedirect.style.display = hidden
         }, 990);
@@ -37,18 +40,24 @@ close.addEventListener("click", () => {
 
 
 bts.forEach((bt)=>{
+
     bt.onclick = () => {
 
         const redirect = bt.dataset.path
+
         if(redirect !== undefined){
+
             window.location.replace(redirect)
+
         }
     }
 })
 
 
 form.addEventListener("submit", (event) => {
+
     event.preventDefault()
+
     const body = {
         email: event.target.children[0].value,
         password: event.target.children[1].value,
@@ -57,6 +66,7 @@ form.addEventListener("submit", (event) => {
 })
 
 function toastOk (type, alert, message) {
+
     const body = document.querySelector("body")
 
     const div = document.createElement("div")
@@ -79,6 +89,7 @@ function toastOk (type, alert, message) {
     
     div.append(title, desc)
     body.appendChild(div)
+    
     setTimeout(() => {
         window.location.reload()
     }, 4000);
