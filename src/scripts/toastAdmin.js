@@ -1,8 +1,6 @@
 import { getTokenLocal } from './localStorage.js'
-import { renderAllUsers, renderFilteredDepartment, filterCompanies, renderAllDepartaments } from './render/dashboardAdmin.js'
-import { dataCompanies } from './request/dashboardAdmin.js'
+import { renderAllUsers, renderAllDepartaments } from './render/dashboardAdmin.js'
 import { allDepartments } from './request/dashboardAdmin.js'
-
 
 import { 
     createDepartment, 
@@ -18,33 +16,35 @@ import {
     turnOffUserOfDepartment
 } from './request/dashboardAdmin.js'
 
-
-
 async function editUserFromAdmin (user) {
 
         const body = document.querySelector("body")
     
-        const background = document.createElement("div")
+        const background    = document.createElement("div")
         background.classList.add("toast-background", "appear")
-        const toast = document.createElement("div")
+
+        const toast         = document.createElement("div")
         toast.classList.add("toast-body")
     
         const divTitle = document.createElement("div")
         divTitle.classList.add("div-title")
-        const title = document.createElement("h2")
-        const btCloseModal = document.createElement("span")
+
+        const title         = document.createElement("h2")
+        const btCloseModal  = document.createElement("span")
         
-        const divForm = document.createElement("div")
+        const divForm       = document.createElement("div")
         divForm.classList.add("div-form")
+
         const form = document.createElement("form")
     
-        const selectKind = document.createElement("select")
-        const optionPresential = document.createElement("option")
-        const optionHome = document.createElement("option")
-        const optionHybrid = document.createElement("option")
+        const selectKind        = document.createElement("select")
+        const optionPresential  = document.createElement("option")
+        const optionHome        = document.createElement("option")
+        const optionHybrid      = document.createElement("option")
     
         selectKind.setAttribute("name", "kind")
         selectKind.id = "kind"
+
         optionPresential.setAttribute("value", "presencial")
         optionHome.setAttribute("value", "home office")
         optionHybrid.setAttribute("value", "hibrido")
@@ -53,13 +53,13 @@ async function editUserFromAdmin (user) {
         optionHome.innerText = "home office"
         optionHybrid.innerText = "hibrido"
     
-        const selectLevel = document.createElement("select")
-        const optionInter = document.createElement("option")
-        const optionJr = document.createElement("option")
-        const optionFull = document.createElement("option")
-        const optionSenior = document.createElement("option")
+        const selectLevel   = document.createElement("select")
+        const optionInter   = document.createElement("option")
+        const optionJr      = document.createElement("option")
+        const optionFull    = document.createElement("option")
+        const optionSenior  = document.createElement("option")
         
-        const btSubmit = document.createElement("button")
+        const btSubmit      = document.createElement("button")
     
         selectLevel.setAttribute("name", "level")
         selectLevel.id = "level"
@@ -68,40 +68,49 @@ async function editUserFromAdmin (user) {
         optionFull.setAttribute("value", "pleno")
         optionSenior.setAttribute("value", "sênior")
     
-        optionInter.innerText = "estágio"
-        optionJr.innerText = "júnior"
-        optionFull.innerText = "pleno"
-        optionSenior.innerText = "sênior"
+        optionInter.innerText   = "estágio"
+        optionJr.innerText      = "júnior"
+        optionFull.innerText    = "pleno"
+        optionSenior.innerText  = "sênior"
     
-        title.innerText = "Editar Usuário"
-        btCloseModal.innerText = "x"
+        title.innerText         = "Editar Usuário"
+        btCloseModal.innerText  = "x"
     
-        btSubmit.innerText = "Editar"
+        btSubmit.innerText      = "Editar"
     
         selectKind.append(optionPresential, optionHome, optionHybrid)
+
         selectLevel.append(optionInter, optionJr, optionFull, optionSenior)
     
         form.append(selectKind, selectLevel, btSubmit)
+
         divForm.appendChild(form)
     
         divTitle.append(title, btCloseModal)
             
         toast.append(divTitle, divForm)
+
         background.appendChild(toast)
+
         body.appendChild(background)
     
         form.addEventListener("submit", async event => {
+
             event.preventDefault()
+
             const body = {
                 kind_of_work: event.target.children[0].value,
                 professional_level: event.target.children[1].value
             }
+
             const idUser = user.uuid
             const tokenAdmin = getTokenLocal()
+
             await refreshDataUser(idUser, body, tokenAdmin.token)
             await renderAllUsers(dataUsers(tokenAdmin.token))
 
             background.classList.remove("appear")
+
             setTimeout(() => {
                 background.classList.add("desappear")
             }, 2980);
@@ -110,82 +119,79 @@ async function editUserFromAdmin (user) {
                 background.removeAttribute("class")
                 background.innerHTML = ""
             }, 3980);
-/*             background.innerHTML = "" */
         })
-
-/*         btCloseModal.addEventListener("click", () =>{
-            background.innerHTML = ""
-            background.classList.remove("toast-background")
-        }) */
 
         btCloseModal.addEventListener("click", event => {
 
             background.classList.remove("appear")
             background.classList.add("desappear")
-            
+
             setTimeout(() => {
-        
                 background.removeAttribute("class")
                 background.innerHTML = ""
-        
             }, 980)
-            })
+        })
 }
 
 function toastResponse (type, alert, message) {
+
     const body = document.querySelector(".toast-background")
 
-    const div = document.createElement("div")
+    const div   = document.createElement("div")
     const title = document.createElement("p")
-    const desc = document.createElement("span")
+    const desc  = document.createElement("span")
 
     
     if(type == "success"){
+
         div.classList.add("div-toast-response-green")
         title.classList.add("title-toast-response-green")
         desc.classList.add("desc-toast-response-green")
+
         title.innerText = alert
-        desc.innerText = message
+        desc.innerText  = message
         
     }else{
+
         div.classList.add("div-toast-response-red")
         title.classList.add("title-toast-response-red")
         desc.classList.add("desc-toast-response-red")
+
         title.innerText = alert
-        desc.innerText = message
+        desc.innerText  = message
     }
     
     div.append(title, desc)
+
     body.appendChild(div)
-
-
 }
 
 function toastDeleteUser (user) {
 
-    const body = document.querySelector("body")
-    const background = document.createElement("div")
-    const toast = document.createElement("div")
+    const body          = document.querySelector("body")
+    const background    = document.createElement("div")
+    const toast         = document.createElement("div")
 
     background.classList.add("toast-background", "appear")
     toast.classList.add("toast-delete-department")
 
-    const divTitle = document.createElement("div")
-    const title = document.createElement("h2")
-    const btCloseModal = document.createElement("span")
-    const btDeleteUser = document.createElement("button")
+    const divTitle      = document.createElement("div")
+    const title         = document.createElement("h2")
+    const btCloseModal  = document.createElement("span")
+    const btDeleteUser  = document.createElement("button")
 
     divTitle.classList.add("div-title-delete-department")
     title.classList.add("title-delete-department")
+
     btCloseModal.classList.add("bt-cancel-delete-department")
     btDeleteUser.classList.add("bt-confirm-delete-department")
 
     title.innerText = `Realmente deseja remover o usuário ${user.username}?`
     btCloseModal.innerText = "x"
-
     btDeleteUser.innerText = "Confirmar"
 
     divTitle.append(title, btCloseModal)
+
     toast.append(divTitle, btDeleteUser)
 
     background.appendChild(toast)
@@ -193,10 +199,13 @@ function toastDeleteUser (user) {
     body.appendChild(background)
 
     btDeleteUser.onclick = () => {
+
         deleteDataUser(user.uuid)
+
         const token = getTokenLocal()
         
         background.classList.remove("appear")
+
         setTimeout(() => {
             background.classList.add("desappear")
             renderAllUsers(dataUsers(token.token))
@@ -206,36 +215,33 @@ function toastDeleteUser (user) {
             background.removeAttribute("class")
             background.innerHTML = ""
         }, 2980);
-
     }
+
     btCloseModal.addEventListener("click", event => {
 
         background.classList.remove("appear")
         background.classList.add("desappear")
         
         setTimeout(() => {
-    
             background.removeAttribute("class")
             background.innerHTML = ""
-    
         }, 980)
-        })
+    })
 }
-
 
 function toastDeleteDepartment (idDepartment, nameDepartment) {
 
-    const body = document.querySelector("body")
-    const background = document.createElement("div")
-    const toast = document.createElement("div")
+    const body          = document.querySelector("body")
+    const background    = document.createElement("div")
+    const toast         = document.createElement("div")
 
     background.classList.add("toast-background", "appear")
     toast.classList.add("toast-delete-department")
 
-    const divTitle = document.createElement("div")
-    const title = document.createElement("h2")
-    const btCloseModal = document.createElement("span")
-    const btDeleteDepartment = document.createElement("button")
+    const divTitle              = document.createElement("div")
+    const title                 = document.createElement("h2")
+    const btCloseModal          = document.createElement("span")
+    const btDeleteDepartment    = document.createElement("button")
 
     divTitle.classList.add("div-title-delete-department")
     title.classList.add("title-delete-department")
@@ -248,6 +254,7 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
     btDeleteDepartment.innerText = "Confirmar"
 
     divTitle.append(title, btCloseModal)
+
     toast.append(divTitle, btDeleteDepartment)
 
     background.appendChild(toast)
@@ -255,9 +262,11 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
     body.appendChild(background)
 
     btDeleteDepartment.onclick = async () => {
+
         await deleteDepartment(idDepartment)
         
         const token = getTokenLocal()
+
         renderAllDepartaments(allDepartments(token.token))
 
         setTimeout(() => {
@@ -277,32 +286,30 @@ function toastDeleteDepartment (idDepartment, nameDepartment) {
         background.classList.add("desappear")
         
         setTimeout(() => {
-    
             background.removeAttribute("class")
             background.innerHTML = ""
-    
         }, 980)
-        })
+    })
 }
 
 
 async function toastCreateDepartment (allCompanies) {
 
-    let failed = new Array
+    let failed      = new Array
     const companies = await allCompanies
 
-    const body = document.querySelector("body")
-    const background = document.createElement("div")
-    const toast = document.createElement("div")
-    const divForm = document.createElement("div")
+    const body          = document.querySelector("body")
+    const background    = document.createElement("div")
+    const toast         = document.createElement("div")
+    const divForm       = document.createElement("div")
 
     background.classList.add("toast-background", "appear")
     toast.classList.add("toast-new-department")
     divForm.classList.add("div-inputs-new-department")
 
-    const divTitle = document.createElement("div")
-    const title = document.createElement("h2")
-    const btCloseModal = document.createElement("span")
+    const divTitle      = document.createElement("div")
+    const title         = document.createElement("h2")
+    const btCloseModal  = document.createElement("span")
     const btConfirmNewDepartment = document.createElement("button")
 
     divTitle.classList.add("div-title-new-department")
@@ -310,55 +317,61 @@ async function toastCreateDepartment (allCompanies) {
     btCloseModal.classList.add("bt-cancel-new-department")
     btConfirmNewDepartment.classList.add("bt-confirm-new-department")
 
-    title.innerText = "Criar Departamento"
-    btCloseModal.innerText = "x"
+    title.innerText             = "Criar Departamento"
+    btCloseModal.innerText      = "x"
     btConfirmNewDepartment.innerText = "Criar o departamento"
 
-    const form = document.createElement("form")
-    const inputName = document.createElement("input")
-    const inputDescription = document.createElement("input")
+    const form              = document.createElement("form")
+    const inputName         = document.createElement("input")
+    const inputDescription  = document.createElement("input")
 
     inputName.setAttribute("placeholder", "Nome do departamento")
     inputName.setAttribute("required", "required")
     inputDescription.setAttribute("placeholder", "Descrição")
     inputDescription.setAttribute("required", "required")
 
-    const select = document.createElement("select")
-    const optionInit = document.createElement("option")
+    const select        = document.createElement("select")
+    const optionInit    = document.createElement("option")
     
     select.setAttribute("name", "company")
     select.setAttribute("id", "company")
+
     optionInit.innerText = "Selecionar empresa"
     optionInit.id = "invalid"
 
     select.appendChild(optionInit)
 
-
     companies.forEach((company)=>{
         
         const option = document.createElement("option")
+
         option.setAttribute("value", `${company.uuid}`)
+
         option.id = `${company.uuid}`
         option.innerText = `${company.name}`
-        select.appendChild(option)
 
+        select.appendChild(option)
     })
 
     form.append(inputName, inputDescription, select, btConfirmNewDepartment)
+
     divForm.appendChild(form)
+
     divTitle.append(title, btCloseModal)
+
     toast.append(divTitle, divForm)
+
     background.appendChild(toast)
+
     body.appendChild(background)
 
-
-
     form.addEventListener("submit", async (event) =>{
+
         event.preventDefault()
 
-        let newName = event.target.children[0].value
+        let newName     = event.target.children[0].value
         let description = event.target.children[1].value
-        let choice = event.target.children[2].value
+        let choice      = event.target.children[2].value
 
         let verifyDepartmentInChoose = await departmentsFromCompanySelected(choice)
 
@@ -369,15 +382,18 @@ async function toastCreateDepartment (allCompanies) {
                 let formatNewName = await newName.toLowerCase().replace(" ", "").replace("ã", "a").replace("ç", "c").replace(".", "")
 
                 if(formatName === formatNewName){
+
                     failed.push("Fail")
 
                 }
-
             })
+
             setTimeout(() => {
                 
                 if(failed.includes("Fail")){
+
                     toastResponse("Fail", "O departamento já existe.", "Por favor, crie um departamento inexistente.")
+
                 }else{
                     
                     const body = {
@@ -385,20 +401,25 @@ async function toastCreateDepartment (allCompanies) {
                         description: description,
                         company_uuid: choice
                     }
+
                     createDepartment(body)
 
                     background.classList.remove("appear")
+
                     setTimeout(() => {
                         background.classList.add("desappear")
                     }, 2980);
                     
                     setTimeout(() => {
+
                         const token = getTokenLocal()
+
                         background.removeAttribute("class")
                         background.innerHTML = ""
-                        renderAllDepartaments(allDepartments(token.token))
-                    }, 3980);
 
+                        renderAllDepartaments(allDepartments(token.token))
+
+                    }, 3980);
                 }
             }, 100);
     })
@@ -409,29 +430,26 @@ async function toastCreateDepartment (allCompanies) {
         background.classList.add("desappear")
         
         setTimeout(() => {
-    
             background.removeAttribute("class")
             background.innerHTML = ""
-    
         }, 980)
-        })
+    })
 }
-
 
 function toastEditDescriptionDepartment (oldValues, idDepartment, data) {
 
-    const body = document.querySelector("body")
-    const background = document.createElement("div")
-    const toast = document.createElement("div")
-    const divForm = document.createElement("div")
+    const body          = document.querySelector("body")
+    const background    = document.createElement("div")
+    const toast         = document.createElement("div")
+    const divForm       = document.createElement("div")
 
     background.classList.add("toast-background", "appear")
     toast.classList.add("toast-edit-department")
     divForm.classList.add("div-input-edit-department")
 
-    const divTitle = document.createElement("div")
-    const title = document.createElement("h2")
-    const btCloseModal = document.createElement("span")
+    const divTitle      = document.createElement("div")
+    const title         = document.createElement("h2")
+    const btCloseModal  = document.createElement("span")
     const btConfirmEdit = document.createElement("button")
 
     divTitle.classList.add("div-title-edit-department")
@@ -439,8 +457,8 @@ function toastEditDescriptionDepartment (oldValues, idDepartment, data) {
     btCloseModal.classList.add("bt-cancel-edit-department")
     btConfirmEdit.classList.add("bt-confirm-edit-department")
 
-    title.innerText = "Editar Departamento"
-    btCloseModal.innerText = "x"
+    title.innerText         = "Editar Departamento"
+    btCloseModal.innerText  = "x"
     btConfirmEdit.innerText = "Salvar alterações"
 
     const form = document.createElement("form")
@@ -451,33 +469,41 @@ function toastEditDescriptionDepartment (oldValues, idDepartment, data) {
     inputDescription.setAttribute("required", "required")
 
     divTitle.append(title, btCloseModal)
+
     form.append(inputDescription, btConfirmEdit)
+
     divForm.appendChild(form)
 
     toast.append(divTitle, divForm)
 
     background.appendChild(toast)
+
     body.appendChild(background)
 
-
     form.addEventListener("submit", async (event) => {
+
         event.preventDefault()
 
         const body = {
             description: inputDescription.value
         }
+
         editDescriptionDepartment(body, idDepartment)
 
-
         background.classList.remove("appear")
+
         setTimeout(() => {
             background.classList.add("desappear")
         }, 2980);
         
         setTimeout(() => {
+
             background.removeAttribute("class")
+
             background.innerHTML = ""
+
             window.location.reload()
+
         }, 3980);
     })
 
@@ -487,75 +513,75 @@ function toastEditDescriptionDepartment (oldValues, idDepartment, data) {
         background.classList.add("desappear")
 
         setTimeout(() => {
-
             background.removeAttribute("class")
             background.innerHTML = ""
-
         }, 980)
-
-
     })
 }
-
 
 async function toastViewDepartment (department) {
 
     const divContRight = document.querySelectorAll(".toast-background")
 
     divContRight.forEach((div)=>{
+
         div.removeAttribute("class")
         div.innerHTML=""
+
     })
 
-    const body = document.querySelector("body")
-    const background = document.createElement("div")
-    const toast = document.createElement("div")
+    const body          = document.querySelector("body")
+    const background    = document.createElement("div")
+    const toast         = document.createElement("div")
     const secContainers = document.createElement("section")
 
     background.classList.add("toast-background", "appear")
     toast.classList.add("toast-view-department")
     secContainers.classList.add("sec-containers-modal")
 
-    const divTitle = document.createElement("div")
-    const title = document.createElement("h2")
-    const btCloseModal = document.createElement("span")
+    const divTitle      = document.createElement("div")
+    const title         = document.createElement("h2")
+    const btCloseModal  = document.createElement("span")
     
     divTitle.classList.add("div-title-view-department")
     title.classList.add("title-view-department")
     btCloseModal.classList.add("bt-close-view-department")
     
-    title.innerText = department.name
-    btCloseModal.innerText = "x"
+    title.innerText         = department.name
+    btCloseModal.innerText  = "x"
     
     divTitle.append(title, btCloseModal)
 
-    const divContainerLeft = document.createElement("div")
-    const desc = document.createElement("p")
-    const company = document.createElement("span")
+    const divContainerLeft  = document.createElement("div")
+    const desc              = document.createElement("p")
+    const company           = document.createElement("span")
 
     divContainerLeft.classList.add("div-view-container-left")
     desc.classList.add("description-container-left")
     company.classList.add("company-container-left")
 
-    desc.innerText = department.description
-    company.innerText = department.companies.name
+    desc.innerText      = department.description
+    company.innerText   = department.companies.name
 
     divContainerLeft.append(desc, company)
 
 
     const divContainerRight = document.createElement("div")
-    const select = document.createElement("select")
-    const optionInit = document.createElement("option")
-    const btContract = document.createElement("button")
+    const select            = document.createElement("select")
+    const optionInit        = document.createElement("option")
+    const btContract        = document.createElement("button")
 
     divContainerRight.classList.add("div-view-container-right")
     btContract.classList.add("bt-contract")
+
     btContract.setAttribute("disabled", "disabled")
+
     btContract.id = "choose"
     btContract.innerText = "Contratar"
 
     select.setAttribute("name", "users")
     optionInit.setAttribute("value", "default")
+
     optionInit.innerText = "Selecionar usuário"
 
     select.appendChild(optionInit)
@@ -565,9 +591,11 @@ async function toastViewDepartment (department) {
     dataUsersNotWorking.forEach((user) => {
 
         const option = document.createElement("option")
+
         if(user.username !== "ADMIN"){
 
             option.setAttribute("value", `${ user.username}`)
+
             option.innerText = user.username
             option.id =  user.uuid
 
@@ -578,8 +606,8 @@ async function toastViewDepartment (department) {
 
     divContainerRight.append(select, btContract)
 
-
     const ulActiveUsersDept = document.createElement("ul")
+
     ulActiveUsersDept.classList.add("ul-bottom-toast-view-department")
 
     const usersThisDept = await dataUsersFromDepartment(department)
@@ -591,31 +619,38 @@ async function toastViewDepartment (department) {
             const li = document.createElement("li")
     
             const divInfos = document.createElement("div")
+
             divInfos.classList.add("div-infos-users-same-dept")
     
-            const userName = document.createElement("h2")
-            const level = document.createElement("p")
+            const userName  = document.createElement("h2")
+            const level     = document.createElement("p")
             const companyName = document.createElement("span")
     
             userName.classList.add("user-dept-name")
             level.classList.add("user-dept-level")
             companyName.classList.add("user-dept-company-name")
     
-            userName.innerText = user.username
-            level.innerText = user.professional_level
-            companyName.innerText = department.companies.name
+            userName.innerText      = user.username
+            level.innerText         = user.professional_level
+            companyName.innerText   = department.companies.name
     
     
             const btTurnOff = document.createElement("button")
+
             btTurnOff.classList.add("bt-turn-off-user")
+
             btTurnOff.id = user.uuid
             btTurnOff.innerText = "Desligar"
     
             divInfos.append(userName, level, companyName)
+
             li.append(divInfos, btTurnOff)
+
             ulActiveUsersDept.appendChild(li)
+
             toast.appendChild(ulActiveUsersDept)
         })
+
     }else{
 
         ulActiveUsersDept.innerHTML = ""
@@ -623,11 +658,12 @@ async function toastViewDepartment (department) {
     }
 
     secContainers.append(divContainerLeft, divContainerRight)
+
     toast.append(divTitle, secContainers, ulActiveUsersDept)
+
     background.appendChild(toast)
+
     body.appendChild(background)
-
-
 
     select.addEventListener("change", event =>{
 
@@ -640,6 +676,7 @@ async function toastViewDepartment (department) {
             const idUser = select.selectedOptions[0].id
 
             btContract.onclick = (event) => {
+
                 event.preventDefault()
 
                 const body = {
@@ -648,18 +685,17 @@ async function toastViewDepartment (department) {
                 }
 
                 admitUser(body)
-                setTimeout(() =>{
 
+                setTimeout(() =>{
                     toastViewDepartment(department)
                 },2000)
             }
- 
         }else{
+
             btContract.setAttribute("disabled", "disabled")
+
         }
-
     })
-
 
     btCloseModal.addEventListener("click", event => {
 
@@ -667,33 +703,28 @@ async function toastViewDepartment (department) {
         background.classList.add("desappear")
         
         setTimeout(() => {
-    
             background.innerHTML = ""
             background.removeAttribute("class")
-    
         }, 980)
-        })
-        /* btCloseModal.addEventListener("click", () => { */
+    })
 
     const btTurnOff = document.querySelectorAll(".bt-turn-off-user")
+
     btTurnOff.forEach((bt) => {
         
         bt.onclick = (event) =>{
+
             event.preventDefault()
+
             const idUserToTurnOff = bt.id
+
             turnOffUserOfDepartment(idUserToTurnOff)
 
             setTimeout(() =>{
-    
                 toastViewDepartment(department)
             },2000)
-
         }
-    })
-
-        
+    })        
 }
-
-
 
 export { toastResponse, editUserFromAdmin, toastDeleteUser, toastDeleteDepartment, toastCreateDepartment, toastEditDescriptionDepartment,toastViewDepartment }

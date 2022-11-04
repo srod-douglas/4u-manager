@@ -127,10 +127,12 @@ input {
     body{
         width: 100vw;
     }
+
     main{
         width: 100vw;
         margin: 0 0;
     }
+
     header{
         padding: 0 1rem;
         display: flex;
@@ -196,6 +198,7 @@ input {
     #vectorClose{
         margin: 0;
     }
+
     section{
         height: 70vh;
         width: 100vw;
@@ -203,16 +206,21 @@ input {
         padding: 3rem 1rem 2rem 1rem;
     }
 }
+
 @media (min-width: 768px){
+
     .container-vectors{
         display: none;
     }
+
     #vector{
         display: none;
     }
+
     #vectorClose{
         display: none;
     }
+    
     main {
         height: 100vh;
         width: 100vw;

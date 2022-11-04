@@ -1,31 +1,35 @@
 import { urlAllCompanies, urlSectors  } from "../path.js";
 
 async function getAllCompanies () {
+
     const request = await fetch(urlAllCompanies)
 
     try{
+
         if(request.ok){
+
             const data = await request.json()
             return data
+
         }
-    }catch(err){
-        throw console.error(err.message)
-    }
+
+    }catch(err){}
 }
 
 async function getAllSectors () {
+
     const request = await fetch(urlSectors)
     
     try{
 
         if(request.ok){
+
             const data = await request.json()
             return data
+
         }
 
-    }catch(err){
-        throw console.error(err)
-    }
+    }catch(err){}
 }
 
 async function getSectorClicked (sector) {
@@ -35,13 +39,13 @@ async function getSectorClicked (sector) {
     try{
 
         if(request.ok){
+
             const data = await request.json()
             return data
+
         }
 
-    }catch(err){
-        throw console.error(err)
-    }
+    }catch(err){}
 }
 
 const sectors = await getAllSectors()

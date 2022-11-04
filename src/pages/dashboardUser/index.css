@@ -88,8 +88,6 @@ header > div > img {
     font-weight: 400;
 }
 
-
-
 .sec_infosCompanie{
     margin: 0rem 5%;
 }
@@ -140,14 +138,6 @@ ul{
     cursor: pointer;
 }
 
-
-
-
-
-
-
-/*                     */
-
 .background-modal-edit{
     width: 100vw;
     height: 100vh;
@@ -169,13 +159,11 @@ ul{
     background-color: var(--color-white);
 }
 
-
 .div-title-modal-edit-user{
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
 }
-
 
 .title-modal{
     font-size: var(--font-size-8);
@@ -239,9 +227,6 @@ input:focus{
     color: var(--color-blue);
 }
 
-
-
-
 .div-toast-alert{
     width: 400px;
     height: 300px;
@@ -251,7 +236,6 @@ input:focus{
     border: 1px solid var(--color-green);
     border-radius: 1rem;
 }
-
 
 @keyframes entryPages {
     0%{

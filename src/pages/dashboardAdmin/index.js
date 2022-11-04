@@ -8,14 +8,13 @@ import {
     renderAllUsers 
 } from "../../scripts/render/dashboardAdmin.js";
 
+const token = getTokenLocal()
 
 if(localStorage.getItem("@admin") == null){
     window.location.replace("../../../index.html")
     localStorage.removeItem("@user")
     localStorage.removeItem("@admin")
 }
-
-const token = getTokenLocal()
 
 const logout = document.querySelector("#logout")
 logout.onclick = () => {
@@ -24,7 +23,6 @@ logout.onclick = () => {
     localStorage.removeItem("@user")
     window.location.replace(redirect)
 }
-
 
 setTimeout(() => {
 
